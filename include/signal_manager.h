@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal_manager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 23:01:15 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/04 15:55:14 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/04 15:51:57 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/04 15:52:16 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef SIGNAL_MANAGER_H
+# define SIGNAL_MANAGER_H
 
 
-static char	get_instruction_of_param(int argc, char **argv)
-{
-	
-}
 
-int	main(int argc, char **argv)
-{
-	if (argc > 2 && )
-	{
-		
-	}
-	(void)argc;
-	(void)argv;
-	return (EXIT_SUCCESS);
-}
+#endif

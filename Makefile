@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/03 23:21:12 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/04 15:52:50 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,24 +54,22 @@ endif
 
 SRC = 	main.c				\
 
-HDR =	ft_child.h			\
-		ft_environment.h	\
-		ft_error.h			\
-		ft_exec.h			\
-		ft_fd.h				\
-		ft_files.h			\
-		ft_parent.h			\
-		ft_path.h
+HDR =	executor.h			\
+		expansor.h			\
+		lexer.h				\
+		parser.h			\
+		signal_manager.h
 
 SRCS = $(patsubst %.c,${SRC_DIR}/%.c, ${SRC})
 OBJS = $(patsubst %.c,${OBJ_DIR}/%.o, ${SRC})
 DEPS = $(patsubst %.c,${OBJ_DIR}/%.d, ${SRC})
 
-${PROJ_DIRS}: 
-	@mkdir -p ${OBJ_DIR}
-	@mkdir -p ${BIN_DIR}
 
 all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
+
+${PROJ_DIRS}:
+	@mkdir -p ${OBJ_DIR}
+	@mkdir -p ${BIN_DIR}
 
 update_libs:
 	@echo "\t${CYAN}Updating libs...${RST}"
