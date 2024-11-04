@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/04 15:52:50 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/04 23:06:46 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,22 @@ ifdef	CSANITIZE
 	SANITIZE_FLAGS	= -g3 -fsanitize=address -fsanitize=leak
 endif
 
-SRC = 	main.c				\
+LIBS_FLAG = -lreadline -lft -lgnl 
 
-HDR =	executor.h			\
+SRC = 	main.c					\
+		builtins/builtin_exit.c	\
+		tokenizer/token.c		\
+		tokenizer/tokenizer.c	\
+		shell/minishell.c		\
+
+
+#HDR =	builtin
+#		colours.h			\
+		config.h			\
+		executor.h			\
 		expansor.h			\
 		lexer.h				\
+		minishell.h			\
 		parser.h			\
 		signal_manager.h
 
@@ -69,6 +80,9 @@ all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
 
 ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}
+	@mkdir -p ${OBJ_DIR}/builtins/
+	@mkdir -p ${OBJ_DIR}/shell/
+	@mkdir -p ${OBJ_DIR}/tokenizer/
 	@mkdir -p ${BIN_DIR}
 
 update_libs:
@@ -85,7 +99,7 @@ ${GNL_LIB}:
 	
 ${BIN_DIR}/${NAME}: update_libs ${LIBFT_LIB} ${GNL_LIB} ${OBJS} Makefile
 	@echo "${CYAN}Linking ${NAME}...${RST}"
-	@${CC} ${CFLAGS} ${SANITIZE_FLAGS} -L ${LIBFT_DIR}/bin -L ${GNL_DIR}/bin -o ${BIN_DIR}/${NAME} ${OBJS} -lft -lgnl
+	@${CC} ${CFLAGS} ${SANITIZE_FLAGS} -L ${LIBFT_DIR}/bin -L ${GNL_DIR}/bin -o ${BIN_DIR}/${NAME} ${OBJS} ${LIBS_FLAG}
 
 
 ${OBJ_DIR}/%.o : ${SRC_DIR}/%.c Makefile
