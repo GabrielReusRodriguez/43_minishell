@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:58:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/05 22:44:15 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/05 22:45:22 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/05 23:24:52 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#include <stdlib.h>
+#include "tokenizer/token.h"
 
-# include "libft.h"
+void	tokenizer_clear_list_node(void *node)
+{
+	t_token *token;
 
-#define TOKENIZER_TOKEN_SEPARATOR " \0\t\"\'"
-
-bool	tokenizer_get_tokens(const char *cmd, t_list **token_list);
-void	tokenizer_clear_list_node(void *);
-
-#endif
+	token = (t_token *)node;
+	token_destroy(token);
+	free(token);
+}

@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:58:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/05 22:44:15 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/05 22:48:29 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/05 22:49:24 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#include <stdlib.h>
+#include "minishell.h"
 
-# include "libft.h"
+bool	minishell_init(t_minishell *shell)
+{
+	shell->run = true;
+	shell->last_status = EXIT_SUCCESS;
+	shell->cmd = NULL;
+	shell->mode = INTERACTIVE;
+	shell->last_status = EXIT_SUCCESS;
+	return (true);
+}
 
-#define TOKENIZER_TOKEN_SEPARATOR " \0\t\"\'"
-
-bool	tokenizer_get_tokens(const char *cmd, t_list **token_list);
-void	tokenizer_clear_list_node(void *);
-
-#endif
+bool	minishell_destroy(t_minishell *shell)
+{
+	if (shell->cmd != NULL)
+	{
+		free(shell->cmd);
+		shell->cmd = NULL;
+	}
+	return (true);
+}

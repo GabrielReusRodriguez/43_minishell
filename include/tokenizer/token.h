@@ -6,12 +6,14 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:49:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/04 23:05:18 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/05 22:47:26 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
+
+# include <stdbool.h>
 
 typedef enum e_token_type
 {
