@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/05 23:21:41 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/07 23:19:29 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static	bool	tokenizer_extract_token(const char *cmd, size_t init, \
 {
 	char	*text;
 
-	printf("init %ld final %ld \n", init, final);
 	text = ft_substr(cmd, init, final - init);
 	if (text == NULL)
 		return(ft_err_errno(NULL), false);
@@ -46,7 +45,10 @@ static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 		if (init_char == '\"' || init_char == '\'') 
 		{
 			if (init_char == cmd[*final])
+			{
+				(*final)++;
 				return (tokenizer_extract_token(cmd, init, *final, token));
+			}
 		}
 		else
 		{
@@ -85,8 +87,6 @@ static bool	new_node_token_list(t_list **node, t_token *token)
 	return (true);
 }
 
-#include <stdio.h>
-
 bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 {
 	size_t	i;
@@ -100,7 +100,7 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 	{
 		while(cmd[i] == ' ' && cmd[i] != '\0')
 			i++;
-		last_read_char = i;
+		last_read_char = i + 1;
 		if (!tokenizer_get_next_token(cmd, i, &last_read_char, &token))
 			return (ft_lstclear(token_list, free), false);
 		if (!new_node_token_list(&node, token))
@@ -111,8 +111,6 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 			return (false);
 		}
 		ft_lstadd_back(token_list, node);
-		
-		printf("Last %ld\n",last_read_char);
 		i = last_read_char;
 	}
 	debug_tokens(*token_list);
