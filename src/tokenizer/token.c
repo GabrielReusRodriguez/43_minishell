@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:56:23 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/04 23:15:52 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 00:33:09 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,12 @@ void	token_destroy(t_token *token)
 		free (token->text);
 		token->text = NULL;
 	}
+}
+
+bool	token_new_list_node(t_list **node, t_token *token)
+{
+	*node = ft_lstnew(token);
+	if (*node == NULL)
+		return (ft_err_errno(NULL), false);
+	return (true);
 }

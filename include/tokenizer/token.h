@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:49:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/07 23:35:06 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 00:34:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TOKEN_H
 
 # include <stdbool.h>
+# include "libft.h"
 
 typedef enum e_token_type
 {
@@ -35,5 +36,6 @@ typedef struct s_token
 void	token_init(t_token *token, char *_text, t_token_type _type);
 bool	token_new(t_token **token, char *_text, t_token_type _type);
 void	token_destroy(t_token *token);
+bool	token_new_list_node(t_list **node, t_token *token);
 
 #endif

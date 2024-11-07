@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:45:22 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/07 23:41:29 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 00:35:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,19 @@ t_token_type	tokenizer_get_token_type(const char *text)
 		return (WORD);
 	}
 	return (NONE);
+}
+
+bool	tokenizer_extract_token(const char *cmd, size_t init, \
+					size_t final, t_token **token)
+{
+	char			*text;
+	t_token_type	type;
+
+	text = ft_substr(cmd, init, final - init);
+	if (text == NULL)
+		return(ft_err_errno(NULL), false);
+	type = tokenizer_get_token_type(text);
+	if(!token_new(token, text, type))
+		return(ft_err_errno(NULL), false);
+	return (true);
 }
