@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 00:46:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 00:54:01 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,44 +76,6 @@ static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 		return (tokenizer_extract_token(cmd, init, *final, token));
 	return (true);
 }
-
-/*
-static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
-					size_t *final, t_token **token)
-{
-	char	init_char;
-
-	init_char= cmd[init];
-	if (ft_strchr(TOKENIZER_COMMAND_SEPARATOR, init_char) != NULL)
-	{
-		(*final)++;
-		return (tokenizer_extract_token(cmd, init, *final, token));
-	}
-	if (init_char == '\"' || init_char == '\'')
-		(*final)++;
-	while (cmd[*final] != '\0')
-	{
-		if (init_char == '\"' || init_char == '\'') 
-		{
-			if (init_char == cmd[*final])
-			{
-				(*final)++;
-				return (tokenizer_extract_token(cmd, init, *final, token));
-			}
-		}
-		else
-		{
-			if (cmd[*final] == ' ' || \
-					ft_strchr(TOKENIZER_COMMAND_SEPARATOR, cmd[*final]) != NULL)
-				return (tokenizer_extract_token(cmd, init, *final, token));
-		}
-		(*final)++;
-	}
-	if (init != *final)
-		return (tokenizer_extract_token(cmd, init, *final, token));
-	return (true);
-}
-*/
 
 bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 {
