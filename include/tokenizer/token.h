@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:49:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/05 22:47:26 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/07 23:35:06 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 typedef enum e_token_type
 {
 	NONE,
-	WORD
+	WORD,
+	DQUOTE,
+	SQUOTE,
+	PIPE,
+	SEMICOLON
 
 }	t_token_type;
 
