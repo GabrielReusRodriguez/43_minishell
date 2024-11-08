@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 23:01:15 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 13:13:04 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:00:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (!main_init(&shell, (const char **)env))
 			return (EXIT_FAILURE);
-	if (argc > 2 && ft_strcmp("-C", argv[1]) == 0)
+	if (argc > 2 && ft_strcmp("-c", argv[1]) == 0)
 	{
 		shell.mode = STANDALONE;
 		if (!main_get_cmd_from_param(argv, &shell.cmd))
