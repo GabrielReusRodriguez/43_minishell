@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:27:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 01:10:34 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 00:27:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@ bool	execute_builtin(const char *cmd, t_minishell *shell);
 
 //builtins/builtin_exit.c
 bool	builtin_exit(char **params, t_minishell *shell);
+
+//builtins/builtin_env.c
+bool	builtin_env(char **params, t_minishell *shell);
+
+//builtin/builtin_export.c
+bool	builtin_export(char **params, t_minishell *shell);
 
 #endif
