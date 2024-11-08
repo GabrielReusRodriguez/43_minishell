@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd.h                                               :+:      :+:    :+:   */
+/*   pair.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 10:43:53 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 11:15:39 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/08 11:22:26 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/08 11:30:54 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FD_H
-# define FD_H
+#ifndef PAIR_H
+# define PAIR_H
 
-# define FD_NONE	-1
+# include <stdbool.h>
 
-bool	fd_copy(int oldfd, int *newfd);
-bool	fd_replace(int oldfd, int newfd);
-bool	fd_close(int fd);
+typedef struct s_pair
+{
+	char	*key;
+	char	*value;
+
+} t_pair;
+
+t_pair	pair_new();
+bool	pair_init(t_pair *pair, const char *_key, const char *_value);
+bool	pair_update(t_pair *pair, const char *_key, const char *_value);
+void	pair_destroy(t_pair *pair);
 
 #endif
