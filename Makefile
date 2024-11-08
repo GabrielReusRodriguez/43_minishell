@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/08 15:57:53 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/09 00:36:04 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ endif
 LIBS_FLAG = -lreadline -lft -lgnl 
 
 SRC = 	main.c							\
+		builtins/builtin_env.c			\
+		builtins/builtin_export.c		\
 		builtins/builtin_exit.c			\
 		builtins/builtins_utils.c		\
 		env/env_utils.c					\
