@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:00:24 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 13:32:25 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 23:49:42 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	env_load(t_environment *env, const char **main_env);
 t_environment	env_new(void);
 void			env_init(t_environment *env);
 void			env_destroy(t_environment *env);
+void			env_debug(t_environment env);
 
 
 

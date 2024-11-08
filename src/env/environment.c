@@ -6,10 +6,11 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:30:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 16:33:24 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 00:21:15 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 
 #include <stdlib.h>
 
@@ -37,7 +38,7 @@ static bool env_extract_pair(const char *line, int pos_separator, char **key, \
 	*key = ft_substr(line, 0, pos_separator);
 	if (*key == NULL)
 		return (ft_err_errno(NULL), false);
-	*value = ft_substr(line, pos_separator, len - pos_separator);
+	*value = ft_substr(line, pos_separator + 1, len - pos_separator);
 	if (*value == NULL)
 	{
 		*value = ft_strdup("");
@@ -86,38 +87,44 @@ static bool	env_parse_line(t_environment *env, const char *line)
 	t_pair	*pair;
 	t_list	*node;
 
+	pair = NULL;
 	line_value = ft_strchr(line, '=');
 	if (line_value == NULL)
 	{
-		if (env_new_empty_var(&pair, line))
+		if (!env_new_empty_var(&pair, line))
 			return (false);
 	}
 	else
 	{
-		if (env_new_var(&pair, line))
+		if (!env_new_var(&pair, line))
 			return (false);
 	}
 	node = ft_lstnew(pair);
 	if (node == NULL)
+	{
+		pair_destroy(pair);
+		free (pair);
 		return (ft_err_errno(NULL), false);
+	}
 	ft_lstadd_back(&env->vars, node);
 	return (true);
 }
 
+#include <stdio.h>
 
 bool	env_load(t_environment *env, const char **main_env)
 {
-	char	*env_line;
+	char	**env_line;
 
 	if (main_env == NULL)
 	{
 		env->vars = NULL;
 		return (false);
 	}
-	env_line = (char *)*main_env;
-	while (env_line != NULL)
+	env_line = (char **)main_env;
+	while (*env_line != NULL)
 	{
-		if (!env_parse_line(env, env_line))
+		if (!env_parse_line(env, *env_line))
 		{
 			env_destroy(env);
 			return (false);
@@ -125,4 +132,23 @@ bool	env_load(t_environment *env, const char **main_env)
 		env_line++;
 	}
 	return (true);
+}
+
+# include <stdio.h>
+void	env_debug(t_environment env)
+{
+
+	t_list *node;
+	t_pair *pair;
+
+	printf("ENV DEBUG ************************\n");	
+	node = env.vars;
+	while (node != NULL)
+	{
+		pair = (t_pair*)node->content;
+		printf("\tKey: _%s_ Value:  _%s_\n", pair->key, pair->value);
+		node = node->next;
+	}
+	printf("FIN ENV DEBUG ********************\n");	
+
 }

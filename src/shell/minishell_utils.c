@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:48:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 13:25:30 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 00:19:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ bool	minishell_init(t_minishell *shell, const char **env)
 	shell->cmd = NULL;
 	shell->mode = INTERACTIVE;
 	shell->last_status = EXIT_SUCCESS;
-	(void)env;
+	if (!env_load(&shell->env, env))
+		return (false);
 	//env_load(shell->)
 	if (!fd_copy(STDIN_FILENO, &shell->config.fd_copy_stdin))
 		return (false);
@@ -40,6 +41,8 @@ bool	minishell_destroy(t_minishell *shell)
 		free(shell->cmd);
 		shell->cmd = NULL;
 	}
+	if (shell->env.vars != NULL)
+		env_destroy(&shell->env);
 	if (!fd_close(shell->config.fd_copy_stdin) || \
 			!fd_close(shell->config.fd_copy_stdout))
 		return (false);
