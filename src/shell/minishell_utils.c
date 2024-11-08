@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:48:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 11:17:04 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 13:25:30 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 
 #include "minishell.h"
 #include "fd.h"
+#include "env/environment.h"
 
-bool	minishell_init(t_minishell *shell)
+bool	minishell_init(t_minishell *shell, const char **env)
 {
 	shell->run = true;
 	shell->last_status = EXIT_SUCCESS;
 	shell->cmd = NULL;
 	shell->mode = INTERACTIVE;
 	shell->last_status = EXIT_SUCCESS;
+	(void)env;
+	//env_load(shell->)
 	if (!fd_copy(STDIN_FILENO, &shell->config.fd_copy_stdin))
 		return (false);
 	if (!fd_copy(STDOUT_FILENO, &shell->config.fd_copy_stdout))

@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 11:40:57 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 11:55:17 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ bool	pair_update(t_pair *pair, const char *_key, const char *_value)
 void	pair_destroy(t_pair *pair)
 {
 	if (pair->key != NULL)
-	{
 		free (pair->key);
-	}
 	if (pair->value != NULL)
-	{
 		free (pair->value);
-	}
 }

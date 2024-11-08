@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/08 11:03:19 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/08 13:28:17 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,12 +57,15 @@ LIBS_FLAG = -lreadline -lft -lgnl
 SRC = 	main.c							\
 		builtins/builtin_exit.c			\
 		builtins/builtins_utils.c		\
+		env/env_utils.c					\
+		env/environment.c				\
 		file/fd.c						\
 		tokenizer/token.c				\
 		tokenizer/tokenizer.c			\
 		tokenizer/tokenizer_utils.c		\
 		shell/minishell.c				\
 		shell/minishell_utils.c			\
+		utils/pair.c
 
 
 #HDR =	builtin
@@ -85,9 +88,11 @@ all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
 ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}
 	@mkdir -p ${OBJ_DIR}/builtins/
+	@mkdir -p ${OBJ_DIR}/env/
 	@mkdir -p ${OBJ_DIR}/file/
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
+	@mkdir -p ${OBJ_DIR}/utils/
 	@mkdir -p ${BIN_DIR}
 
 update_libs:
@@ -114,12 +119,12 @@ ${OBJ_DIR}/%.o : ${SRC_DIR}/%.c Makefile
 clean:
 	@make --no-print-directory clean -C ${LIBFT_DIR}
 	@make --no-print-directory clean -C ${GNL_DIR}
-	rm -rf ${OBJ_DIR}
+	@rm -rf ${OBJ_DIR}
 
 fclean: clean
 	@make --no-print-directory fclean -C ${LIBFT_DIR}
 	@make --no-print-directory fclean -C ${GNL_DIR}
-	rm -rf ${BIN_DIR}
+	@rm -rf ${BIN_DIR}
 
 re: fclean all
 

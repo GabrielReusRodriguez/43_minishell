@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 23:01:15 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/04 23:30:58 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 13:13:04 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static bool main_get_cmd_from_param(char **argv, char **cmd)
 	return (true);
 }
 
-static bool	main_init(t_minishell *shell)
+static bool	main_init(t_minishell *shell, const char **env)
 {
-	if (!minishell_init(shell))
+	if (!minishell_init(shell, env))
 		return (false);
 	return (true);
 }
@@ -41,12 +41,12 @@ static bool	main_destroy(t_minishell *shell)
 	return(true);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	t_minishell		shell;
 	unsigned char	status;
 
-	if (!main_init(&shell))
+	if (!main_init(&shell, (const char **)env))
 			return (EXIT_FAILURE);
 	if (argc > 2 && ft_strcmp("-C", argv[1]) == 0)
 	{

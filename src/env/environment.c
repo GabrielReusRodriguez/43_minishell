@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:10:58 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 12:45:32 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/08 12:30:21 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/08 13:23:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "env/environment.h"
 
-# include "colours.h"
-
-//# define  SHELL_DEFAULT_PROMPT "minishell> " 
-
-# define  SHELL_DEFAULT_PROMPT COLOUR_BLUE "minishell> " COLOUR_RST 
-
-typedef struct s_shell_config
+bool	env_load(t_environment *env, char **main_env)
 {
-	int fd_copy_stdin;
-	int fd_copy_stdout;
-	
-} t_shell_config;
-
-#endif
+	(void)env;
+	(void)main_env;
+	return (true);
+}
