@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/08 00:59:23 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/08 11:03:19 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ LIBS_FLAG = -lreadline -lft -lgnl
 SRC = 	main.c							\
 		builtins/builtin_exit.c			\
 		builtins/builtins_utils.c		\
+		file/fd.c						\
 		tokenizer/token.c				\
 		tokenizer/tokenizer.c			\
 		tokenizer/tokenizer_utils.c		\
@@ -84,6 +85,7 @@ all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
 ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}
 	@mkdir -p ${OBJ_DIR}/builtins/
+	@mkdir -p ${OBJ_DIR}/file/
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
 	@mkdir -p ${BIN_DIR}

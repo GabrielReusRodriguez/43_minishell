@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_utils.c                                  :+:      :+:    :+:   */
+/*   fd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 22:48:29 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 10:43:20 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/08 10:43:53 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/08 10:47:48 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minishell.h"
+# ifndef FD_H
+# define FD_H
 
-bool	minishell_init(t_minishell *shell)
-{
-	shell->run = true;
-	shell->last_status = EXIT_SUCCESS;
-	shell->cmd = NULL;
-	shell->mode = INTERACTIVE;
-	shell->last_status = EXIT_SUCCESS;
-	return (true);
-}
+bool	fd_copy(int oldfd);
+bool	fd_replace(int oldfd, int newfd);
+bool	fd_close(int fd);
 
-bool	minishell_destroy(t_minishell *shell)
-{
-	if (shell->cmd != NULL)
-	{
-		free(shell->cmd);
-		shell->cmd = NULL;
-	}
-	return (true);
-}
+#endif

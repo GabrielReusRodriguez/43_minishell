@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:25:50 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 01:20:23 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 10:42:33 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ typedef struct s_minishell
 	
 }	t_minishell;
 
+//shell/minishell_utils.c
 bool	minishell_init(t_minishell *shell);
 bool	minishell_destroy(t_minishell *shell);
+
+//shell/minishell.c
 bool	minishell_loop(t_minishell *shell);
 
 #endif
