@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:05:30 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 12:16:08 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 15:53:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ typedef struct s_var_cache
 	t_pair	*pwd;
 
 }	t_var_cache;
+
+bool	var_is_in_cache(const char * var_name);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/08 13:28:17 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/08 15:57:53 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRC = 	main.c							\
 		tokenizer/tokenizer_utils.c		\
 		shell/minishell.c				\
 		shell/minishell_utils.c			\
-		utils/pair.c
+		utils/pair.c					\
+		env/var_cache.c					\
 
 
 #HDR =	builtin

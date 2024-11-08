@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pair.h                                             :+:      :+:    :+:   */
+/*   var_cache.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 11:22:26 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 15:36:01 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/08 15:53:33 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/08 15:56:27 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAIR_H
-# define PAIR_H
+#include <stdbool.h>
 
-# include <stdbool.h>
+#include "env/var_cache.h"
+#include "libft.h"
 
-typedef struct s_pair
+bool	var_is_in_cache(const char * var_name)
 {
-	char	*key;
-	char	*value;
-
-} t_pair;
-
-t_pair	pair_new();
-bool	pair_init(t_pair *pair, const char *_key, const char *_value);
-bool	pair_update(t_pair *pair, const char *_key, const char *_value);
-void	pair_destroy(t_pair *pair);
-void	pair_free_node(void *);
-
-#endif
+	if (ft_strcmp(VAR_CACHE_PATH, var_name) == 0)
+		return (true);
+	if (ft_strcmp(VAR_CACHE_PWD, var_name) == 0)
+		return (true);
+	return (false);
+}
