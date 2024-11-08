@@ -6,9 +6,11 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/05 22:50:46 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/08 01:12:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -16,9 +18,7 @@
 #include "libft.h"
 #include "config.h"
 #include "tokenizer/tokenizer.h"
-
 #include "builtins.h"
-#include <unistd.h>
 
 bool	minishell_loop(t_minishell *shell)
 {
@@ -33,8 +33,9 @@ bool	minishell_loop(t_minishell *shell)
 		{
 			add_history(shell->cmd);
 			tokenizer_get_tokens(shell->cmd, &tokens_list);
-			if (ft_strcmp("exit", shell->cmd) == 0)
-				builtin_exit(NULL, shell);
+			printf("CMD: _%s_\n", shell->cmd);
+			if (is_builtin(shell->cmd))
+				execute_builtin(shell->cmd, shell);
 		}
 	}
 	ft_lstclear(&tokens_list, tokenizer_clear_list_node);

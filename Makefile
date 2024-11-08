@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/05 22:49:56 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/08 00:59:23 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ LIBS_FLAG = -lreadline -lft -lgnl
 
 SRC = 	main.c							\
 		builtins/builtin_exit.c			\
+		builtins/builtins_utils.c		\
 		tokenizer/token.c				\
 		tokenizer/tokenizer.c			\
 		tokenizer/tokenizer_utils.c		\
