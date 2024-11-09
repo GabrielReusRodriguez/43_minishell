@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:58:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/08 00:36:31 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 22:29:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define TOKENIZER_TOKEN_SEPARATOR " \0\t\"\'"
 # define TOKENIZER_COMMAND_SEPARATOR "|;"
+# define TOKENIZER_REDIRECTION_CHAR "<>"
 
 bool	tokenizer_get_tokens(const char *cmd, t_list **token_list);
 
