@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 00:40:50 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:06:03 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void debug_tokens(t_list *list)
 }
 
 
+/*
 static void	tokenizer_get_end_of_next_token(const char *cmd, \
 					size_t init, size_t *final)
 {
@@ -62,6 +63,37 @@ static void	tokenizer_get_end_of_next_token(const char *cmd, \
 		(*final)++;
 	}
 }
+*/
+
+static bool tokenizer_get_end_of_next_token(const char *cmd, \
+					size_t *final)
+{
+	char	separator;
+	
+	separator = ' ';
+	while (cmd[*final] != '\0')
+	{
+		if (separator == ' ')
+		{
+			if (cmd[*final] == '\"' || cmd[*final] == '\'')
+			{
+				separator = cmd[*final];
+				(*final)++;
+				continue;
+			}
+			if (cmd[*final] == ' ' || \
+					ft_strchr(TOKENIZER_COMMAND_SEPARATOR, cmd[*final]) != NULL)
+				return (true);
+		}
+		else
+			if (cmd[*final] == separator)
+				separator = ' ';
+		(*final)++;
+	}
+	if (separator == '\'' || separator == '\"')
+		return (ft_err_error("Detected unclosed quoted cmd"), false);
+	return (true);
+}
 
 static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 					size_t *final, t_token **token)
@@ -71,7 +103,8 @@ static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 		(*final)++;
 		return (tokenizer_extract_token(cmd, init, *final, token));
 	}
-	tokenizer_get_end_of_next_token(cmd, init, final);
+	if (!tokenizer_get_end_of_next_token(cmd, final))
+		return (false);
 	if (init != *final)
 		return (tokenizer_extract_token(cmd, init, *final, token));
 	return (true);
@@ -92,12 +125,12 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 			i++;
 		last_read_char = i;
 		if (!tokenizer_get_next_token(cmd, i, &last_read_char, &token))
-			return (ft_lstclear(token_list, free), false);
+			return (ft_lstclear(token_list, tokenizer_clear_list_node), false);
 		if (!token_new_list_node(&node, token))
 		{	
 			token_destroy(token);
 			free (token);
-			ft_lstclear(token_list, free);
+			ft_lstclear(token_list, tokenizer_clear_list_node);
 			return (false);
 		}
 		ft_lstadd_back(token_list, node);
