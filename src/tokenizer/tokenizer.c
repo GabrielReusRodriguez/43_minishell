@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 16:06:03 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:25:59 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,46 +37,31 @@ static void debug_tokens(t_list *list)
 	}
 }
 
-
-/*
-static void	tokenizer_get_end_of_next_token(const char *cmd, \
-					size_t init, size_t *final)
+static void determine_token_type(t_token_type *type, char actual_char)
 {
-	if (cmd[init] == '\"' || cmd[init] == '\'')
-		(*final)++;
-	while (cmd[*final] != '\0')
+	if (*type != DQUOTE && *type != SQUOTE)
 	{
-		if (cmd[init] == '\"' || cmd[init] == '\'') 
-		{
-			if (cmd[init] == cmd[*final])
-			{
-				(*final)++;
-				return;
-			}
-		}
-		else
-		{
-			if (cmd[*final] == ' ' || \
-					ft_strchr(TOKENIZER_COMMAND_SEPARATOR, cmd[*final]) != NULL)
-				return ;
-		}
-		(*final)++;
+		if (actual_char == '\"')
+			*type = DQUOTE;
+		if (actual_char == '\'')
+			*type = SQUOTE;
 	}
 }
-*/
 
 static bool tokenizer_get_end_of_next_token(const char *cmd, \
-					size_t *final)
+					size_t *final, t_token_type *type)
 {
 	char	separator;
 	
 	separator = ' ';
+	*type = WORD;
 	while (cmd[*final] != '\0')
 	{
 		if (separator == ' ')
 		{
 			if (cmd[*final] == '\"' || cmd[*final] == '\'')
 			{
+				determine_token_type(type, cmd[*final]);
 				separator = cmd[*final];
 				(*final)++;
 				continue;
@@ -98,15 +83,23 @@ static bool tokenizer_get_end_of_next_token(const char *cmd, \
 static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 					size_t *final, t_token **token)
 {
+	t_token_type	type;
+	bool			result;
+	
 	if (ft_strchr(TOKENIZER_COMMAND_SEPARATOR, cmd[init]) != NULL)
 	{
 		(*final)++;
 		return (tokenizer_extract_token(cmd, init, *final, token));
 	}
-	if (!tokenizer_get_end_of_next_token(cmd, final))
+	if (!tokenizer_get_end_of_next_token(cmd, final, &type))
 		return (false);
 	if (init != *final)
-		return (tokenizer_extract_token(cmd, init, *final, token));
+	{
+		result = tokenizer_extract_token(cmd, init, *final, token);
+		if (result)
+			(*token)->type = type; 
+		return (result);
+	}
 	return (true);
 }
 
