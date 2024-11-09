@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:45:22 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 16:00:25 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 22:14:53 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ void	tokenizer_clear_list_node(void *node)
 }
 
 t_token_type	tokenizer_get_token_type(const char *text)
-{
+{	
 	if (text != NULL)
 	{
 		if (*text == '\"')
-			return (DQUOTE);
+			return (TOKEN_TYPE_DQUOTE);
 		if (*text == '\'')
-			return (SQUOTE);
+			return (TOKEN_TYPE_SQUOTE);
 		if (*text == '|')
-			return (PIPE);
+			return (TOKEN_TYPE_PIPE);
 		if (*text == ';')
-			return (SEMICOLON);
-		return (WORD);
+			return (TOKEN_TYPE_SEMICOLON);
+		if (*text == '>' || *text == '<')
+			return (TOKEN_TYPE_REDIR);
+		return (TOKEN_TYPE_WORD);
 	}
-	return (NONE);
+	return (TOKEN_TYPE_NONE);
 }
 
 bool	tokenizer_extract_token(const char *cmd, size_t init, \

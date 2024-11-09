@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 16:25:59 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/09 22:14:03 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static void debug_tokens(t_list *list)
 
 static void determine_token_type(t_token_type *type, char actual_char)
 {
-	if (*type != DQUOTE && *type != SQUOTE)
+	if (*type != TOKEN_TYPE_DQUOTE && *type != TOKEN_TYPE_SQUOTE)
 	{
 		if (actual_char == '\"')
-			*type = DQUOTE;
+			*type = TOKEN_TYPE_DQUOTE;
 		if (actual_char == '\'')
-			*type = SQUOTE;
+			*type = TOKEN_TYPE_SQUOTE;
 	}
 }
 
@@ -54,7 +54,7 @@ static bool tokenizer_get_end_of_next_token(const char *cmd, \
 	char	separator;
 	
 	separator = ' ';
-	*type = WORD;
+	*type = TOKEN_TYPE_WORD;
 	while (cmd[*final] != '\0')
 	{
 		if (separator == ' ')
