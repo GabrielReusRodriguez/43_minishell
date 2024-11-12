@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/09 00:36:04 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/10 10:47:56 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,11 @@ SRC = 	main.c							\
 		builtins/builtin_export.c		\
 		builtins/builtin_exit.c			\
 		builtins/builtins_utils.c		\
+		cmd/cmd.c						\
 		env/env_utils.c					\
 		env/environment.c				\
+		expansor/expansor.c				\
+		expansor/expansor_utils.c		\
 		file/fd.c						\
 		tokenizer/token.c				\
 		tokenizer/tokenizer.c			\
@@ -91,7 +94,9 @@ all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
 ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}
 	@mkdir -p ${OBJ_DIR}/builtins/
+	@mkdir -p ${OBJ_DIR}/cmd/
 	@mkdir -p ${OBJ_DIR}/env/
+	@mkdir -p ${OBJ_DIR}/expansor/
 	@mkdir -p ${OBJ_DIR}/file/
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
