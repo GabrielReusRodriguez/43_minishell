@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
+#    By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/10 10:47:56 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/15 09:16:11 by greus-ro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC = 	main.c							\
 		shell/minishell.c				\
 		shell/minishell_utils.c			\
 		utils/pair.c					\
+		utils/string_unquote.c			\
 		env/var_cache.c					\
 
 
