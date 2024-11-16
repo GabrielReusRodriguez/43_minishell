@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/12 21:19:28 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:52:26 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	minishell_loop(t_minishell *shell)
 			add_history(shell->cmd);
 	}
 	tokenizer_get_tokens(shell->cmd, &tokens_list);
-	expansor_expand(&tokens_list);
+	expansor_expand(&tokens_list, shell->env);
 	if (is_builtin(shell->cmd))
 		execute_builtin(shell->cmd, shell);
 	ft_lstclear(&tokens_list, tokenizer_clear_list_node);

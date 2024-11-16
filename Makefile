@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+         #
+#    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/15 09:16:11 by greus-ro         ###   ########.fr        #
+#    Updated: 2024/11/16 21:38:40 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,17 +73,8 @@ SRC = 	main.c							\
 		utils/pair.c					\
 		utils/string_unquote.c			\
 		env/var_cache.c					\
+		env/env_var_getter.c
 
-
-#HDR =	builtin
-#		colours.h			\
-		config.h			\
-		executor.h			\
-		expansor.h			\
-		lexer.h				\
-		minishell.h			\
-		parser.h			\
-		signal_manager.h
 
 SRCS = $(patsubst %.c,${SRC_DIR}/%.c, ${SRC})
 OBJS = $(patsubst %.c,${OBJ_DIR}/%.o, ${SRC})

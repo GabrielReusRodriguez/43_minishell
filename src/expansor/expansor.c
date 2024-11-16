@@ -6,13 +6,14 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/12 21:23:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:52:53 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "tokenizer/token.h"
 #include "expansor.h"
+#include "env/environment.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,11 +45,12 @@ static bool	expansor_expand_token(t_list **token_list, t_token *token)
 	return (true);
 }
 
-bool	expansor_expand(t_list **token_list)
+bool	expansor_expand(t_list **token_list, t_environment env)
 {
 	t_list	*node;
 	t_list	*list;
 	
+	(void)env;
 	node = *token_list;
 	while (node != NULL)
 	{
