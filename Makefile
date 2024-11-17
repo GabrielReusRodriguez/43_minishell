@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/16 21:38:40 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/17 12:42:28 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,6 @@ SRC = 	main.c							\
 SRCS = $(patsubst %.c,${SRC_DIR}/%.c, ${SRC})
 OBJS = $(patsubst %.c,${OBJ_DIR}/%.o, ${SRC})
 DEPS = $(patsubst %.c,${OBJ_DIR}/%.d, ${SRC})
-
 
 all: ${PROJ_DIRS} ${BIN_DIR}/${NAME}
 

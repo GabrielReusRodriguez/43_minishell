@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 20:39:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/16 21:38:09 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/17 13:03:59 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	env_get(t_environment env, const char *key, char **value)
 	init_value (value);
 	if(!normalize_key(key, &_key))
 		return (false);
-	if (!find_var(env, key, value))
-		return(false);
-	return (true);
+	if (!find_var(env, _key, value))
+		return(free (_key), false);
+	return (free (_key), true);
 }
