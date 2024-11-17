@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:00:24 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/16 21:04:55 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/17 13:09:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_environment
 bool	env_load(t_environment *env, const char **main_env);
 
 //env/env_var_getter.c
-bool	env_get(t_environment env, const char *key, char **value);
+bool	env_get_var(t_environment env, const char *key, char **value);
 
 //env/env_utils.c
 t_environment	env_new(void);

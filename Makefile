@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/17 12:42:28 by gabriel          ###   ########.fr        #
+#    Updated: 2024/11/17 20:16:51 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,19 +61,22 @@ SRC = 	main.c							\
 		builtins/builtins_utils.c		\
 		cmd/cmd.c						\
 		env/env_utils.c					\
+		env/env_var_getter.c			\
 		env/environment.c				\
+		env/var_cache.c					\
 		expansor/expansor.c				\
+		expansor/expansor_cmd.c			\
 		expansor/expansor_utils.c		\
 		file/fd.c						\
+		shell/minishell.c				\
+		shell/minishell_utils.c			\
 		tokenizer/token.c				\
 		tokenizer/tokenizer.c			\
 		tokenizer/tokenizer_utils.c		\
-		shell/minishell.c				\
-		shell/minishell_utils.c			\
 		utils/pair.c					\
-		utils/string_unquote.c			\
-		env/var_cache.c					\
-		env/env_var_getter.c
+		utils/str_fragment.c			\
+		utils/str_join_components.c		\
+		utils/str_unquote.c				\
 
 
 SRCS = $(patsubst %.c,${SRC_DIR}/%.c, ${SRC})

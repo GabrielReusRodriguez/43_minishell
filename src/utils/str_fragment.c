@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   str_fragment.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 08:27:29 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/11/17 20:52:57 by gabriel          ###   ########.fr       */
+/*   Created: 2024/11/17 19:30:57 by gabriel           #+#    #+#             */
+/*   Updated: 2024/11/17 19:34:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#include "utils/string.h"
 
-
-# include <stdbool.h>
-
-typedef struct s_str_fragment
+t_str_fragment	utils_new_str_fragment(void)
 {
-	int begin;
-	int end;
-} t_str_fragment;
-
-bool			utils_string_unquote(const char *original, char **unquoted);
-bool			utils_str_join_compontents(const char *hdr, const char *body, \
-					const char *tail, char **final);
-t_str_fragment	utils_new_str_fragment(void);
-
-
-#endif
+	t_str_fragment	fragment;
+	
+	fragment.begin = 0;
+	fragment.end = 0;
+	return (fragment);
+}
