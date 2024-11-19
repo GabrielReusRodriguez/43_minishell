@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 22:32:46 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:28:40 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 
+/*
 static void debug_tokens(t_list *list)
 {
 	t_list *node;
@@ -36,6 +37,7 @@ static void debug_tokens(t_list *list)
 		node = node->next;
 	}
 }
+*/
 
 static void determine_token_word_type(t_token_type *type, char actual_char)
 {
@@ -152,6 +154,6 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 		ft_lstadd_back(token_list, node);
 		i = last_read_char;
 	}
-	debug_tokens(*token_list);
+//	debug_tokens(*token_list);
 	return (true);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_unquote.c                                   :+:      :+:    :+:   */
+/*   str_unquote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 08:27:08 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/11/15 11:44:09 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/11/20 00:27:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ bool	utils_string_unquote(const char *original, char **unquoted)
 	quote_found = false;
 	while (original[i] != '\0')
 	{
+		if (original[i] == '\\')
+		{
+			i+=2;
+			continue;
+		}
 		if (original[i] == '\"' || original[i] == '\'')
 		{
 			quote_found = true;
