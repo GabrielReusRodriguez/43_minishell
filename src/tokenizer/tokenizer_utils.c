@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:45:22 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/19 22:52:32 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:01:49 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ bool	tokenizer_extract_token(const char *cmd, size_t init, \
 					size_t final, t_token **token)
 {
 	char			*text;
-	char			*unquoted;
+//	char			*unquoted;
 	t_token_type	type;
 
-	unquoted = NULL;
+//	unquoted = NULL;
 	text = ft_substr(cmd, init, final - init);
 	if (text == NULL)
 		return(ft_err_errno(NULL), false);
 	type = tokenizer_get_token_type(text);
 	//Added unquote .
-	if (!utils_string_unquote(text, &unquoted))
-		return (false);
-	free (text);
+//	if (!utils_string_unquote(text, &unquoted))
+//		return (false);
+//	free (text);
 	//End Added unquote.
-	if(!token_new(token, unquoted, type))
+//	if(!token_new(token, unquoted, type))
+	if(!token_new(token, text, type))
 		return(ft_err_errno(NULL), false);
 	return (true);
 }

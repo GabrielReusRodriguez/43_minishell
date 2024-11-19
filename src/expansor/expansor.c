@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/19 22:52:58 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:14:13 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,22 @@ static bool	expansor_expand_node(t_list *node, t_list **new_nodes, t_environment
 {
 	t_token	*token;
 	char	*new_cmd;
+	char	*unquoted;
 
+	unquoted = NULL;
+	new_cmd = NULL;
 	token = (t_token *)node->content;
 	if (!expansor_expand_string(token->text,env, &new_cmd))
 		return (false);
-	if (!tokenizer_get_tokens(new_cmd, new_nodes))
-		return (free (new_cmd), false);
+			//Added unquote .
+	if (!utils_string_unquote(new_cmd, &unquoted))
+		return (false);
 	free (new_cmd);
+	//End Added unquote.
+
+	if (!tokenizer_get_tokens(unquoted, new_nodes))
+		return (free (unquoted), false);
+	free (unquoted);
 	return (true);
 }
 

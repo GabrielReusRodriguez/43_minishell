@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/19 23:04:33 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:09:36 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static bool expansor_add_var(const char *original, t_str_fragment var_hit, \
 
 bool	expansor_expand_string(const char *cmd, t_environment env, char **new_cmd)
 {
-
 	t_str_fragment	str_treated;
 	t_str_fragment	var_hit;
 	int		len;
@@ -84,8 +83,17 @@ bool	expansor_expand_string(const char *cmd, t_environment env, char **new_cmd)
 	if (!expansor_init(&str_treated, &var_hit, new_cmd))
 		return (false);
 	len = ft_strlen(cmd);
+	printf("cmd _%s_\n", cmd);
 	while (str_treated.end < len)
 	{
+		printf("test _%c_\n", cmd[str_treated.end]);
+//		if (cmd[var_hit.begin] == '\'')
+//		{
+//			printf("Comillas\n");
+//			var_hit.begin++;
+//			while(cmd[var_hit.begin] != '\0' && cmd[var_hit.begin] != '\'')
+//				var_hit.begin++;
+//		}		
 		expansor_find_var((char *)cmd, &var_hit.begin, &var_hit.end, len);
 		if (var_hit.end <= len)
 		{
@@ -103,3 +111,45 @@ bool	expansor_expand_string(const char *cmd, t_environment env, char **new_cmd)
 		return (false);
 	return (true);
 }
+
+/*
+bool	expansor_expand_string(const char *cmd, t_environment env, char **new_cmd)
+{
+	t_str_fragment	str_treated;
+	t_str_fragment	var_hit;
+	int		len;
+
+	if (!expansor_init(&str_treated, &var_hit, new_cmd))
+		return (false);
+	len = ft_strlen(cmd);
+	printf("cmd _%s_\n", cmd);
+	while (str_treated.end < len)
+	{
+		printf("test _%c_\n", cmd[str_treated.end]);
+		if (cmd[str_treated.end] == '\'')
+		{
+			printf("Comillas\n");
+			str_treated.end++;
+			while(cmd[str_treated.end] != '\0' && cmd[str_treated.end] != '\'')
+				str_treated.end++;
+			var_hit.begin = str_treated.end;
+			continue;
+		}		
+		expansor_find_var((char *)cmd, &var_hit.begin, &var_hit.end, len);
+		if (var_hit.end <= len)
+		{
+			if (!expansor_add_hdr(cmd, str_treated, var_hit.begin - str_treated.end, new_cmd))
+				return (free(*new_cmd), false);
+			if  (!expansor_add_var(cmd, var_hit, env, new_cmd))
+				return (free (*new_cmd), false);
+			str_treated.end = var_hit.end;
+			var_hit.begin = var_hit.end;
+		}
+		else
+			break;
+	}
+	if (!expansor_add_hdr(cmd, str_treated, len - str_treated.end, new_cmd))
+		return (false);
+	return (true);
+}
+*/
