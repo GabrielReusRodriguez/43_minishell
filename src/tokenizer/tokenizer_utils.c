@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:45:22 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/15 09:38:47 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:52:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "tokenizer/token.h"
 #include "utils/string.h"
+
+#include <stdio.h>
 
 void	tokenizer_clear_list_node(void *node)
 {

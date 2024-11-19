@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/17 20:51:05 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/11/19 23:04:33 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,24 @@ static bool	expansor_add_hdr(const char *original,t_str_fragment str_treated, \
 	char	*hdr;
 	char	*tmp;
 
-//	hdr = ft_substr(original, str_treated.end, var_hit.begin - str_treated.end);
-	hdr = ft_substr(original, str_treated.end, len);
-	if  (hdr == NULL)
-		return (false);
-	tmp = *new_txt;
-	*new_txt = ft_strjoin(*new_txt, hdr);
-	free (tmp);
-	free (hdr);
-	if (*new_txt == NULL)
-		return (ft_err_errno(NULL), false);
+	if (len > 0)
+	{
+		hdr = ft_substr(original, str_treated.end, len);
+		if (hdr == NULL)
+			return (ft_err_errno(NULL),false);
+		tmp = *new_txt;
+		*new_txt = ft_strjoin(tmp, hdr);
+		free (tmp);
+		free (hdr);
+		if (*new_txt == NULL)
+			return (ft_err_errno(NULL), false);
+	}
 	return (true);
 }
 
 static bool expansor_add_var(const char *original, t_str_fragment var_hit, \
 				t_environment env, char **new_txt)
 {
-
 	char	*key;
 	char	*value;
 	char	*tmp;
@@ -100,6 +101,5 @@ bool	expansor_expand_string(const char *cmd, t_environment env, char **new_cmd)
 	}
 	if (!expansor_add_hdr(cmd, str_treated, len - str_treated.end, new_cmd))
 		return (false);
-	printf("\tEXPANDED: _%s_\n", *new_cmd);
 	return (true);
 }
