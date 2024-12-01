@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 22:37:33 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/01 21:16:46 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 #include "tokenizer/token.h"
 #include "tokenizer/tokenizer.h"
-#include "libft.h"
 
-bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd)
+t_cmd	cmd_new(void)
 {
-	t_token	*token;
+	t_cmd	cmd;
 	
-	*cmd = (t_cmd*)malloc(sizeof(t_cmd));
-	if (cmd == NULL)
-		return (ft_err_errno(NULL), false);
-	while (init != final)
-	{
-		token = (t_token *)init;
-		if (token->type == TOKEN_TYPE_REDIR)
-		{
-			continue;
-		}
-		if (token->type == TOKEN_TYPE_WORD)
-		{
-			continue;
-		}
-		if (token->type == TOKEN_TYPE_PIPE || token->type == TOKEN_TYPE_SEMICOLON)
-		{
-			
-		}
-		init = init->next;
-	}
-	return (true);
+	cmd_init(&cmd);
+	return (cmd);
+}
+
+void	cmd_init(t_cmd *cmd)
+{
+	cmd->input_redirections = NULL;
+	cmd->executable = NULL;
+	cmd->args = NULL;
+	cmd->output_redirections = NULL;	
+}
+
+void	cmd_destroy(t_cmd *cmd)
+{
+	if (cmd->input_redirections != NULL)
+		ft_lstclear(&cmd->input_redirections, tokenizer_clear_list_node);
+	if (cmd->executable != NULL)
+		token_destroy(cmd->executable);
+	if (cmd->args != NULL)
+		ft_lstclear(&cmd->args, tokenizer_clear_list_node);
+	if (cmd->output_redirections != NULL)
+		ft_lstclear(&cmd->output_redirections, tokenizer_clear_list_node);
 }

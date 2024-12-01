@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 21:08:13 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/01 21:13:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ bool	minishell_loop(t_minishell *shell)
 	expansor_expand(&tokens_list, shell->env);
 	if (is_builtin(shell->cmd))
 		execute_builtin(shell->cmd, shell);
+//	else
+//		execute_cmd(shell->cmd, shell);
 	ft_lstclear(&tokens_list, tokenizer_clear_list_node);
 	free (shell->cmd);
 	shell->cmd = NULL;

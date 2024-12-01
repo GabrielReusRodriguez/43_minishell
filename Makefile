@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/11/19 23:01:14 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/01 21:55:42 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = 	main.c							\
 		builtins/builtin_exit.c			\
 		builtins/builtins_utils.c		\
 		cmd/cmd.c						\
+		cmd/cmd_utils.c					\
 		env/env_utils.c					\
 		env/env_var_getter.c			\
 		env/environment.c				\
@@ -68,6 +69,8 @@ SRC = 	main.c							\
 		expansor/expansor_cmd.c			\
 		expansor/expansor_utils.c		\
 		file/fd.c						\
+		job/job.c						\
+		job/job_utils.c					\
 		shell/minishell.c				\
 		shell/minishell_utils.c			\
 		tokenizer/token.c				\
@@ -95,7 +98,7 @@ ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
 	@mkdir -p ${OBJ_DIR}/utils/
-	@mkdir -p ${BIN_DIR}
+	@mkdir -p ${BIN_DIR}/job
 
 update_libs:
 	@echo "\t${CYAN}Updating libs...${RST}"
