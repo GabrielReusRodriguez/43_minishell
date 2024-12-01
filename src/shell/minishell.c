@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/16 20:52:26 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/01 21:08:13 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	minishell_loop(t_minishell *shell)
 {
 	t_list *tokens_list;
 	
+	tokens_list = NULL;
 	if (shell->mode == STANDALONE)
 		shell->run = false;
 	else
