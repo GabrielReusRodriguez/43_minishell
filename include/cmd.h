@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 22:43:08 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 20:14:36 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_cmd_type
 typedef struct s_cmd
 {
 	t_list		*input_redirections;
-	t_token		*executable;
+	char		*executable;
 	t_list		*args;
 	t_list		*output_redirections;
 	t_cmd_type	type;
@@ -36,6 +36,8 @@ typedef struct s_cmd
 void	cmd_init(t_cmd *cmd);
 t_cmd	cmd_new(void);
 void	cmd_destroy(t_cmd *cmd);
+void	cmd_debug(t_cmd *cmd);
+
 
 //bool	cmd_create_from_tokens(const t_list *tokens, t_cmd **cmd);
 bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd);

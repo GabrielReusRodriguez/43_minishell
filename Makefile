@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/01 21:55:42 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/04 18:47:04 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,8 @@ SRC = 	main.c							\
 		file/fd.c						\
 		job/job.c						\
 		job/job_utils.c					\
+		redirect/redirect_utils.c		\
+		redirect/redirect.c				\
 		shell/minishell.c				\
 		shell/minishell_utils.c			\
 		tokenizer/token.c				\
