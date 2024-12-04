@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/04 18:47:04 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/04 22:14:47 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,10 +97,12 @@ ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}/env/
 	@mkdir -p ${OBJ_DIR}/expansor/
 	@mkdir -p ${OBJ_DIR}/file/
+	@mkdir -p ${OBJ_DIR}/job
+	@mkdir -p ${OBJ_DIR}/redirect
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
 	@mkdir -p ${OBJ_DIR}/utils/
-	@mkdir -p ${BIN_DIR}/job
+	@mkdir -p ${BIN_DIR}
 
 update_libs:
 	@echo "\t${CYAN}Updating libs...${RST}"

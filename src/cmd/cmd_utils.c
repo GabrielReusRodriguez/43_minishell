@@ -6,13 +6,16 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/04 20:26:43 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 21:56:20 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "cmd.h"
 #include "tokenizer/token.h"
 #include "tokenizer/tokenizer.h"
+
 
 #include <stdio.h>
 #include "redirection.h"

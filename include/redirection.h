@@ -6,12 +6,14 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 22:48:28 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/04 19:16:59 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:12:45 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECT_H
 # define REDIRECT_H
+
+# include "libft.h"
 
 typedef enum e_redirect_type
 {

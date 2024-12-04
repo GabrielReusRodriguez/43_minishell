@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 21:08:51 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:13:21 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,6 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 		ft_lstadd_back(token_list, node);
 		i = last_read_char;
 	}
-//	debug_tokens(*token_list);
+	debug_tokens(*token_list);
 	return (true);
 }

@@ -6,9 +6,11 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:55:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 22:21:30 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:06:37 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "job.h"
 #include "libft.h"
@@ -18,12 +20,18 @@
 bool	job_add_cmd(t_list *init, t_list *final, t_job *job)
 {
 	t_cmd	*cmd;
-	t_token	*token;
 	t_list	*node;
 
-	cmd_parse_tokens(init, final, &cmd);
-
-
+	if (!cmd_parse_tokens(init, final, &cmd))
+		return(false);
+	node = ft_lstnew(cmd);
+	if (node == NULL)
+	{
+		ft_err_errno(NULL);
+		cmd_destroy(cmd);
+		return(free (cmd), false);
+	}
+	ft_lstadd_back(&job->cmds, node);
 	return (true);
 }
 

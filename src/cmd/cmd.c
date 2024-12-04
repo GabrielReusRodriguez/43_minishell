@@ -6,9 +6,11 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/04 20:09:45 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 21:55:52 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "cmd.h"
 #include "tokenizer/token.h"
@@ -29,14 +31,14 @@ static bool	cmd_add_redirection(t_list **node, t_cmd *cmd)
 	{
 		ft_err_errno(NULL);
 		redirect_destroy(redirection);
-		return (freee (redirection),false);
+		return (free (redirection),false);
 	}
 	if (redirection->type == REDIRECT_IN_FILE || \
 			redirection->type == REDIRECT_IN_HEREDOC)
-		ft_lstadd_back(cmd->input_redirections, redirection);
+		ft_lstadd_back(&cmd->input_redirections, redir_node);
 	if (redirection->type == REDIRECT_OUT_ADD || \
 			redirection->type == REDIRECT_OUT_APPEND)
-		ft_lstadd_back(cmd->output_redirections, redirection);
+		ft_lstadd_back(&cmd->output_redirections, redir_node);
 	return (true);
 }
 

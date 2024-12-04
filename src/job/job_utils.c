@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:50:04 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/01 21:51:09 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:08:09 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	job_init(t_job *job)
 
 void	job_destroy(t_job *job)
 {
-
+	(void)job;
 }
