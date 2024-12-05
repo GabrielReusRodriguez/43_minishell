@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:59:34 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 22:02:23 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/05 22:25:27 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static	bool	redirect_parse_input(t_list **node, t_redirection **redir)
 	return (true);
 }
 
+#include <stdio.h>
+
 static	bool	redirect_parse_output(t_list **node, t_redirection **redir)
 {
 	t_token	*token;
@@ -71,8 +73,8 @@ static	bool	redirect_parse_output(t_list **node, t_redirection **redir)
 		(*redir)->type = REDIRECT_OUT_APPEND;
 		(*node) = (*node)->next;
 		token = (t_token *)(*node)->content;
-		(*redir)->lim_here_doc = ft_strdup(token->text);
-		if ((*redir)->lim_here_doc == NULL)
+		(*redir)->file = ft_strdup(token->text);
+		if ((*redir)->file == NULL)
 			return (free (*redir),false);
 		(*node) = (*node)->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 18:50:11 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/05 22:24:18 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static void	tokenizer_get_end_of_redir(const char *cmd, size_t *final)
 	if (cmd[*final] == '>')
 	{
 		(*final)++;
+		if (cmd[*final] == '>')
+			(*final)++;
 		return ;
 	}
 	if (cmd[*final] == '<')
@@ -141,6 +143,8 @@ bool	tokenizer_get_tokens(const char *cmd, t_list **token_list)
 	{
 		while(cmd[i] == ' ' && cmd[i] != '\0')
 			i++;
+		if (cmd[i] == '\0')
+			break;
 		last_read_char = i;
 		if (!tokenizer_get_next_token(cmd, i, &last_read_char, &token))
 			return (ft_lstclear(token_list, tokenizer_clear_list_node), false);
