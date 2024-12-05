@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/04 22:14:47 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/05 19:05:09 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ ${PROJ_DIRS}:
 
 update_libs:
 	@echo "\t${CYAN}Updating libs...${RST}"
-	@git  submodule update --init --remote --recursive
+#	@git  submodule update --init --remote --recursive
 
 ${LIBFT_LIB}:
 	@echo "\t${CYAN}Making libft...${RST}"

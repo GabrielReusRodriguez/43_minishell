@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/04 21:56:20 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:34:36 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,26 @@ void	cmd_destroy(t_cmd *cmd)
 //		token_destroy(cmd->executable);
 		free (cmd->executable);
 	if (cmd->args != NULL)
-		ft_lstclear(&cmd->args, tokenizer_clear_list_node);
+//		ft_lstclear(&cmd->args, tokenizer_clear_list_node);
+		ft_lstclear(&cmd->args, free);
 	if (cmd->output_redirections != NULL)
 		ft_lstclear(&cmd->output_redirections, tokenizer_clear_list_node);
 }
+
+void	cmd_clear_list_node(void *arg)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)arg;
+	ft_lstclear(&cmd->input_redirections, redirect_clear_list_node);
+	ft_lstclear(&cmd->args, free);
+	free (cmd->executable);
+	cmd->executable = NULL;
+	ft_lstclear(&cmd->output_redirections, redirect_clear_list_node);	
+	//Borramos el propio puntero al content ya que ft_lstclear no lo hará.
+	free (arg);
+}
+
 
 void	cmd_debug(t_cmd *debug)
 {
@@ -63,7 +79,7 @@ void	cmd_debug(t_cmd *debug)
 		printf("\tInputs redirections: \n");
 		while (node != NULL)
 		{
-			redir = (t_redirection *)node;
+			redir = (t_redirection *)node->content;
 			if (redir->type == REDIRECT_IN_FILE)
 				printf("\t\tINPUT FILE redirection to _%s_\n", redir->file);
 			if (redir->type == REDIRECT_IN_HEREDOC)
@@ -92,7 +108,7 @@ void	cmd_debug(t_cmd *debug)
 		printf("\tOutputs redirections: \n");
 		while (node != NULL)
 		{
-			redir = (t_redirection *)node;
+			redir = (t_redirection *)node->content;
 			if (redir->type == REDIRECT_OUT_ADD)
 				printf("\t\tOUTPUT ADD redirection to _%s_\n", redir->file);
 			if (redir->type == REDIRECT_OUT_APPEND)

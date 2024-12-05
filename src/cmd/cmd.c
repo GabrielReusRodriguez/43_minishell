@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/04 21:55:52 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:59:38 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft.h"
 #include "redirection.h"
 
+#include <stdio.h>
 //	bool	redirect_parse(t_list **node, t_redirection **redir);
 static bool	cmd_add_redirection(t_list **node, t_cmd *cmd)
 {
@@ -48,7 +49,7 @@ static bool	cmd_add_word(t_list **node, t_cmd *cmd)
 	t_list	*param_node;
 	char	*param;
 
-	token = (t_token*)*node;
+	token = (t_token*)(*node)->content;
 	if (cmd->executable == NULL)
 	{
 		cmd->executable = ft_strdup(token->text);
@@ -90,34 +91,43 @@ static void	cmd_get_type(t_list *node, t_cmd *cmd)
 
 bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd)
 {
-	t_token	*token;
+	t_token	*token;		
+	t_list	*init_node;
+	
 	
 	*cmd = (t_cmd*)malloc(sizeof(t_cmd));
 	if (*cmd == NULL)
 		return (ft_err_errno(NULL), false);
-	while (init != final)
+	cmd_init(*cmd);
+	init_node = init;
+	while (init_node != final)
 	{
-		token = (t_token *)init;
+		token = (t_token *)init_node->content;
+		printf("token cmd type %d  text _%s_ \n", token->type, token->text);
 		if (token->type == TOKEN_TYPE_REDIR)
 		{
-			if (!cmd_add_redirection(&init, *cmd))
+			printf("Entra redir\n");
+			if (!cmd_add_redirection(&init_node, *cmd))
 			{
 				cmd_destroy(*cmd);
 				return (free(*cmd), false);
 			}
+			
 			continue;
 		}
 		if (token->type == TOKEN_TYPE_WORD)
 		{
-			if (!cmd_add_word(&init,*cmd))
+			printf("Entra word\n");
+			if (!cmd_add_word(&init_node,*cmd))
 			{
 				cmd_destroy(*cmd);
 				return (free(*cmd), false);
 			}
 			continue;
 		}
-		init = init->next;
+		init_node = init_node->next;
 	}
 	cmd_get_type(final, *cmd);
+	cmd_debug(*cmd);
 	return (true);
 }
