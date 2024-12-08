@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 20:09:44 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:33:28 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "cmd.h"
 #include "libft.h"
 
+#include <stdio.h>
+
 static	bool	is_unique_cmd(t_job *job)
 {
 	if (job == NULL)
@@ -27,9 +29,12 @@ static	bool	is_unique_cmd(t_job *job)
 	return (true);
 }
 
-static bool	executor_jobs_loop(t_cmd *cmd, bool *is_pipeline, bool unique_cmd)
+static bool	executor_jobs_loop(t_minishell *shell, t_cmd *cmd, \
+				bool *is_pipeline, bool unique_cmd)
 {
-	executor_execute_cmd(cmd, unique_cmd);
+	printf("Inicio loop\n");
+	executor_execute_cmd(shell, cmd, unique_cmd);
+	printf("Fin exec loop\n");
 	if (cmd->type == CMD_TYPE_PIPE)
 	{
 		*is_pipeline = true;
@@ -43,19 +48,18 @@ static bool	executor_jobs_loop(t_cmd *cmd, bool *is_pipeline, bool unique_cmd)
 	return (true);
 }
 
-bool	executor_execute_job(t_job *job, unsigned char *return_value)
+bool	executor_execute_job(t_minishell *shell, t_job *job)
 {
 	t_list	*node;
 	bool	is_pipeline;
 	bool	unique_cmd;
 
-	(void)return_value;
 	node = job->cmds;
 	is_pipeline = false;
 	unique_cmd = is_unique_cmd(job);
 	while (node != NULL)
 	{
-		executor_jobs_loop((t_cmd *)node, &is_pipeline, unique_cmd);
+		executor_jobs_loop(shell, (t_cmd *)node->content, &is_pipeline, unique_cmd);
 		node = node->next;
 	}
 	return (true);

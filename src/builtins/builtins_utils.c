@@ -6,41 +6,62 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:59:00 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/09 00:35:29 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 22:06:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "libft.h"
+#include "cmd.h"
 
-bool	is_builtin(const char *cmd)
+
+int	builtin_count_params(char **params)
 {
-	if (ft_strcmp(BUILTIN_CD, cmd) == 0)
+	int		num;
+
+	num = 0;
+	if (params == NULL)
+		return (0);
+	while(params[num] != NULL)
+		num++;
+	return (num);
+}
+
+
+bool	is_builtin(t_cmd *cmd)
+{
+	if (ft_strcmp(BUILTIN_CD, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_DECLARE, cmd) == 0)
+	if (ft_strcmp(BUILTIN_DECLARE, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_ECHO, cmd) == 0)
+	if (ft_strcmp(BUILTIN_ECHO, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_ENV, cmd) == 0)
+	if (ft_strcmp(BUILTIN_ENV, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_EXIT, cmd) == 0)
+	if (ft_strcmp(BUILTIN_EXIT, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_EXPORT, cmd) == 0)
+	if (ft_strcmp(BUILTIN_EXPORT, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_PWD, cmd) == 0)
+	if (ft_strcmp(BUILTIN_PWD, cmd->executable) == 0)
 		return (true);
-	if (ft_strcmp(BUILTIN_UNSET, cmd) == 0)
+	if (ft_strcmp(BUILTIN_UNSET, cmd->executable) == 0)
 		return (true);
 	return (false);
 }
 
-bool	execute_builtin(const char *cmd, t_minishell *shell)
+bool	execute_builtin(t_cmd *cmd, t_minishell *shell)
 {
-	if (ft_strcmp(BUILTIN_ENV, cmd)  == 0)
-		builtin_env(NULL, shell);
-	if (ft_strcmp(BUILTIN_EXIT, cmd) == 0)
-		builtin_exit(NULL, shell);
-	if (ft_strcmp(BUILTIN_EXPORT, cmd) == 0)
-		builtin_export(NULL, shell);
+	char	**params;
+
+	params = NULL;
+	if(!cmd_export_params(cmd, params))
+		return (false);
+	if (ft_strcmp(BUILTIN_ENV, cmd->executable)  == 0)
+		builtin_env(params, shell);
+	if (ft_strcmp(BUILTIN_EXIT, cmd->executable) == 0)
+		builtin_exit(params, shell);
+	if (ft_strcmp(BUILTIN_EXPORT, cmd->executable) == 0)
+		builtin_export(params, shell);
+	ft_ptr_free_dchar_ptr(params);
 	return (true);
 }

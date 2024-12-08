@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 20:00:44 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:55:02 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void	cmd_clear_list_node(void *);
 
 //bool	cmd_create_from_tokens(const t_list *tokens, t_cmd **cmd);
 bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd);
+
+bool	cmd_export_params(t_cmd *cmd, char **str_params);
+
 
 #endif

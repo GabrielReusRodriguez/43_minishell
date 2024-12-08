@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 20:42:09 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:29:06 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "expansor.h"
 #include "builtins.h"
 #include "job.h"
+#include "executor.h"
 
 bool	minishell_loop(t_minishell *shell)
 {
@@ -40,10 +41,7 @@ bool	minishell_loop(t_minishell *shell)
 	tokenizer_get_tokens(shell->cmd, &tokens_list);
 	expansor_expand(&tokens_list, shell->env);
 	job_parse_tokens(&tokens_list, &job);
-	if (is_builtin(shell->cmd))
-		execute_builtin(shell->cmd, shell);
-//	else
-//		execute_cmd(shell->cmd, shell);
+	executor_execute_job(shell, &job);
 	job_destroy(&job);
 	ft_lstclear(&tokens_list, tokenizer_clear_list_node);
 	free (shell->cmd);
