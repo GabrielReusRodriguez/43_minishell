@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:45:31 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 21:40:12 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 13:19:28 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	redirect_init(t_redirection *redir)
 {
 	redir->file = NULL;
 	redir->lim_here_doc = NULL;
-	redir->here_doc = NULL;
+	redir->here_string = NULL;
 	redir->type = REDIRECT_NONE;
 }
 
@@ -37,8 +37,8 @@ void	redirect_destroy(t_redirection *redir)
 {
 	free (redir->file);
 	redir->file = NULL;
-	free (redir->here_doc);
-	redir->here_doc = NULL;
+	free (redir->here_string);
+	redir->here_string = NULL;
 	free (redir->lim_here_doc);
 	redir->lim_here_doc = NULL;
 }
@@ -50,8 +50,8 @@ void	redirect_clear_list_node(void *arg)
 	redir = (t_redirection *)arg;
 	free (redir->file);
 	redir->file = NULL;
-	free (redir->here_doc);
-	redir->here_doc = NULL;
+	free (redir->here_string);
+	redir->here_string = NULL;
 	free (redir->lim_here_doc);
 	redir->lim_here_doc = NULL;
 	free(arg);

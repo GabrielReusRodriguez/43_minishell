@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:05:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 22:24:18 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 13:03:01 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,26 @@ static bool tokenizer_get_end_of_next_token(const char *cmd, \
 	return (true);
 }
 
-static void	tokenizer_get_end_of_redir(const char *cmd, size_t *final)
+static bool	tokenizer_get_end_of_redir(const char *cmd, size_t *final)
 {
-	
 	if (cmd[*final] == '>')
 	{
 		(*final)++;
 		if (cmd[*final] == '>')
 			(*final)++;
-		return ;
+		return (true);
 	}
 	if (cmd[*final] == '<')
 	{
 		(*final)++;
 		if (cmd[*final] == '<')
 			(*final)++;
+		if (cmd[*final] == '<')
+			(*final)++;
+		if (cmd[*final] == '<' || cmd[*final] == '>')
+			return (ft_err_error("Syntax error"), false);
 	}
+	return (true);
 }
 
 static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
@@ -115,7 +119,8 @@ static	bool	tokenizer_get_next_token(const char *cmd, size_t init, \
 	}
 	if (ft_strchr(TOKENIZER_REDIRECTION_CHAR, cmd[init]) != NULL)
 	{
-		tokenizer_get_end_of_redir(cmd, final);
+		if (!tokenizer_get_end_of_redir(cmd, final))
+			return (false);
 		return (tokenizer_extract_token(cmd, init, *final, token));
 	}
 	if (!tokenizer_get_end_of_next_token(cmd, final, &type))

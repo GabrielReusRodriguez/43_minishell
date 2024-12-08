@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:59:34 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 22:25:27 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 13:20:35 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ static	bool	redirect_parse_input(t_list **node, t_redirection **redir)
 			return (free (*redir),false);
 		(*node) = (*node)->next;
 	}
+	if (ft_strcmp("<<<", token->text) == 0)
+	{
+		(*redir)->type = REDIRECT_IN_HERESTRING;
+		(*node) = (*node)->next;
+		token = (t_token *)(*node)->content;
+		(*redir)->here_string = ft_strdup(token->text);
+		if ((*redir)->here_string == NULL)
+			return (free (*redir),false);
+		(*node) = (*node)->next;
+	}
+
 	return (true);
 }
 
