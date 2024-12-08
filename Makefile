@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/07 20:49:40 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/08 19:48:25 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRC = 	main.c							\
 		env/env_var_getter.c			\
 		env/environment.c				\
 		env/var_cache.c					\
+		executor/executor_jobs.c		\
+		executor/executor_cmd.c			\
 		expansor/expansor.c				\
 		expansor/expansor_cmd.c			\
 		expansor/expansor_utils.c		\
@@ -95,6 +97,7 @@ ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}/builtins/
 	@mkdir -p ${OBJ_DIR}/cmd/
 	@mkdir -p ${OBJ_DIR}/env/
+	@mkdir -p ${OBJ_DIR}/executor/
 	@mkdir -p ${OBJ_DIR}/expansor/
 	@mkdir -p ${OBJ_DIR}/file/
 	@mkdir -p ${OBJ_DIR}/job

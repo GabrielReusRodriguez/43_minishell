@@ -6,12 +6,14 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 20:44:55 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:00:44 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
+
+# include <sys/types.h> 
 
 # include "libft.h"
 # include "tokenizer/token.h"
@@ -26,11 +28,13 @@ typedef enum e_cmd_type
 
 typedef struct s_cmd
 {
-	t_list		*input_redirections;
-	char		*executable;
-	t_list		*args;
-	t_list		*output_redirections;
-	t_cmd_type	type;
+	t_list			*input_redirections;
+	char			*executable;
+	t_list			*args;
+	t_list			*output_redirections;
+	t_cmd_type		type;
+	pid_t			pid;
+	int				return_value;
 }	t_cmd;
 
 void	cmd_init(t_cmd *cmd);

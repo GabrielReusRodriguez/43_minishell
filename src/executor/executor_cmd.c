@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   executor_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:51:04 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 20:14:01 by gabriel          ###   ########.fr       */
+/*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
+/*   Updated: 2024/12/08 20:12:46 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include <sys/types.h>
+#include <unistd.h>
 
-# include <sys/types.h>
+#include "cmd.h"
+#include "minishell.h"
 
-# include "job.h"
-# include "cmd.h"
-# include "minishell.h"
-
-bool	executor_execute_job(t_minishell *shell, t_job *job, \
-			unsigned char *return_value);
 bool	executor_execute_cmd(t_minishell *shell, t_cmd *cmd, \
-			bool is_unique_cmd);
-
-#endif
+			bool is_pipeline, bool unique_cmd)
+{
+	if (!unique_cmd)
+	{
+		if (is_builtin(shell->cmd))
+			execute_builtin(shell->cmd, shell);
+	}
+	(void)cmd;
+	(void)unique_cmd;
+	return (true);
+}

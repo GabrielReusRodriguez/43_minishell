@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 21:34:36 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:00:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_cmd	cmd_new(void)
 
 void	cmd_init(t_cmd *cmd)
 {
+	cmd->pid = -1;
+	cmd->return_value = -1;
 	cmd->input_redirections = NULL;
 	cmd->executable = NULL;
 	cmd->args = NULL;
