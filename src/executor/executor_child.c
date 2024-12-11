@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   executor_child.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:51:04 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:35:42 by gabriel          ###   ########.fr       */
+/*   Created: 2024/12/11 20:29:36 by gabriel           #+#    #+#             */
+/*   Updated: 2024/12/11 21:35:11 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "minishell.h"
+#include "cmd.h"
+#include "builtins.h"
 
-# include <sys/types.h>
+bool	executor_execute_child(t_minishell *shell, t_cmd *cmd)
+{
+	if (is_builtin(cmd))
+	{
+		execute_builtin(cmd, shell);
+		exit (cmd->return_value);
 
-# include "job.h"
-# include "cmd.h"
-# include "minishell.h"
-
-bool	executor_execute_job(t_minishell *shell, t_job *job);
-bool	executor_execute_cmd(t_minishell *shell, t_cmd *cmd, bool is_pipeline);
-
-//executor_child.c
-bool	executor_execute_child(t_minishell *shell, t_cmd *cmd);
-
-#endif
+	}
+	else
+	{
+		exit (EXIT_SUCCESS);
+	}
+	return (true);
+}
