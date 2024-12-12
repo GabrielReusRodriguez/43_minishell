@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:45:25 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/12 20:57:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@
 
 static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 {
-	return (executor_execute_child(shell, cmd));
-	
+	if (!executor_execute_logic(shell, cmd))
+		return (false);
+	cmd->pid = fork();
+	if (cmd->pid < 0)
+		return (ft_err_errno(NULL),false);
+	else
+	{
+		//En caso del hijo....
+		if (cmd->pid  == 0)
+			exit(cmd->return_value);
+		//En caso del padre...
+		else
+		{
+		
+		}		
+	}
+	return (true);
 }
 
 static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
@@ -37,8 +52,10 @@ static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 			//En caso del hijo....
 			if (cmd->pid  == 0)
 			{
-				if (!executor_execute_child(shell, cmd))
-					return (false);
+				if (!executor_execute_logic(shell, cmd))
+					exit(EXIT_FAILURE);
+				exit(cmd->return_value);
+
 			}
 			//En caso del padre...
 			else
@@ -48,7 +65,6 @@ static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 		}
 		return (true);
 }
-
 
 bool	executor_execute_cmd(t_minishell *shell, t_cmd *cmd, bool is_pipeline)
 {
@@ -60,14 +76,5 @@ bool	executor_execute_cmd(t_minishell *shell, t_cmd *cmd, bool is_pipeline)
 	{
 		return (execute_non_pipeline_cmd(shell, cmd));
 	}
-/*
-	if (!is_pipeline && is_builtin(cmd))
-	{
-		shell->last_status = execute_builtin(cmd, shell);
-		return (true);
-	}
-
-	(void)is_pipeline;
-*/
 	return (true);
 }

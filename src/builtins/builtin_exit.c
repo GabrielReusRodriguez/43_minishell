@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:29:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:49:16 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/12 20:57:28 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ static bool	validate_params(char **params)
 }
 
 
-static bool	builtin_process_with_args(char **params, t_minishell *shell)
+static bool	builtin_process_with_args(char **params, t_minishell *shell, t_cmd *cmd)
 {
 	if (!validate_params(params))
 		return (ft_err_error("A numeric args is required"), false);
-	shell->last_status =  ft_atoi(params[0]);
+	cmd->return_value =  ft_atoi(params[0]);
 	shell->run = false;
 	return (true);	
 }
 
-bool	builtin_exit(char **params, t_minishell *shell)
+bool	builtin_exit(char **params, t_minishell *shell, t_cmd *cmd)
 {
 	int	num_params;
 
@@ -56,12 +56,12 @@ bool	builtin_exit(char **params, t_minishell *shell)
 	{
 		if (num_params == 0)
 		{
-			shell->last_status = EXIT_SUCCESS;
+			cmd->return_value = EXIT_SUCCESS;
 			shell->run = false;
 			return (true);
 		}
 		else
-			return (builtin_process_with_args(params, shell));
+			return (builtin_process_with_args(params, shell, cmd));
 	}
 	else
 	{

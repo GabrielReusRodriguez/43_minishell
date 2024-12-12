@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_child.c                                   :+:      :+:    :+:   */
+/*   executor_logic.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:29:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:35:11 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/12 20:11:00 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 #include "cmd.h"
 #include "builtins.h"
 
-bool	executor_execute_child(t_minishell *shell, t_cmd *cmd)
+bool	executor_execute_logic(t_minishell *shell, t_cmd *cmd)
 {
 	if (is_builtin(cmd))
-	{
-		execute_builtin(cmd, shell);
-		exit (cmd->return_value);
-
-	}
+		return (execute_builtin(cmd, shell));
 	else
 	{
-		exit (EXIT_SUCCESS);
+		cmd->return_value = EXIT_SUCCESS;
 	}
 	return (true);
 }

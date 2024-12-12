@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/11 20:30:13 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/12 19:42:03 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRC = 	main.c							\
 		env/var_cache.c					\
 		executor/executor_jobs.c		\
 		executor/executor_cmd.c			\
-		executor/executor_child.c		\
+		executor/executor_logic.c		\
 		expansor/expansor.c				\
 		expansor/expansor_cmd.c			\
 		expansor/expansor_utils.c		\

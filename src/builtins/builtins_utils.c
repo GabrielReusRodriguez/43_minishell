@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:59:00 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:33:44 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/12 20:27:02 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ bool	execute_builtin(t_cmd *cmd, t_minishell *shell)
 	if(!cmd_export_params(cmd, &params))
 		return (false);
 	if (ft_strcmp(BUILTIN_ENV, cmd->executable)  == 0)
-		builtin_env(params, shell);
+		builtin_env(params, shell, cmd);
 	if (ft_strcmp(BUILTIN_EXIT, cmd->executable) == 0)
-		builtin_exit(params, shell);
+		builtin_exit(params, shell, cmd);
 	if (ft_strcmp(BUILTIN_EXPORT, cmd->executable) == 0)
-		builtin_export(params, shell);
+		builtin_export(params, shell, cmd);
 	ft_ptr_free_dchar_ptr(params);
 	return (true);
 }
