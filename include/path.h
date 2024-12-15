@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_logic.c                                   :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 20:29:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/15 22:19:29 by gabriel          ###   ########.fr       */
+/*   Created: 2024/12/15 22:31:42 by gabriel           #+#    #+#             */
+/*   Updated: 2024/12/15 22:43:30 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef PATH_H
+# define PATH_H
 
-#include "minishell.h"
-#include "cmd.h"
-#include "builtins.h"
+bool	path_can_exec(const char *path,  bool verbose);
+bool	path_can_read(const char *path, bool verbose);
+bool	path_can_write(const char *path, bool verbose);
+bool	path_can_exists(const char *path, bool verbose);
+bool	path_check_mask(const char *path, int mask, bool verbose);
 
-bool	executor_execute_logic(t_minishell *shell, t_cmd *cmd)
-{
-	if (is_builtin(cmd))
-		return (execute_builtin(cmd, shell));
-	else
-	{
-		cmd->return_value = EXIT_SUCCESS;
-	}
-	return (true);
-}
+#endif

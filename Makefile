@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/12 19:42:03 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/15 22:40:57 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC = 	main.c							\
 		env/var_cache.c					\
 		executor/executor_jobs.c		\
 		executor/executor_cmd.c			\
+		executor/executor_execve.c		\
 		executor/executor_logic.c		\
 		expansor/expansor.c				\
 		expansor/expansor_cmd.c			\
@@ -75,6 +76,7 @@ SRC = 	main.c							\
 		file/fd.c						\
 		job/job.c						\
 		job/job_utils.c					\
+		path/path_permission.c			\
 		redirect/redirect_utils.c		\
 		redirect/redirect.c				\
 		shell/minishell.c				\
@@ -107,6 +109,7 @@ ${PROJ_DIRS}:
 	@mkdir -p ${OBJ_DIR}/shell/
 	@mkdir -p ${OBJ_DIR}/tokenizer/
 	@mkdir -p ${OBJ_DIR}/utils/
+	@mkdir -p ${OBJ_DIR}/path/
 	@mkdir -p ${BIN_DIR}
 
 update_libs:

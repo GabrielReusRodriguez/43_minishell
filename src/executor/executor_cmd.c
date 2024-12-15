@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/12 20:57:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/15 22:16:37 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,21 @@
 #include <stdio.h>
 
 
+static	bool	execute_execve(t_minishell *shell, t_cmd *cmd)
+{
+	
+}
+
 static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 {
-	if (!executor_execute_logic(shell, cmd))
-		return (false);
+	bool	cmd_builtin;
+
+	cmd_builtin = is_builtin(cmd); 
+	if (cmd_builtin)
+	{
+		if (!execute_builtin(cmd, shell))
+			return (false);
+	}
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		return (ft_err_errno(NULL),false);
@@ -32,12 +43,15 @@ static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 	{
 		//En caso del hijo....
 		if (cmd->pid  == 0)
-			exit(cmd->return_value);
-		//En caso del padre...
-		else
 		{
-		
-		}		
+			if (cmd_builtin)
+				exit(cmd->return_value);
+			else
+			{
+				if (!execute_non_builtin(shell, cmd))
+					return (false);
+			}
+		}
 	}
 	return (true);
 }
@@ -55,7 +69,6 @@ static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 				if (!executor_execute_logic(shell, cmd))
 					exit(EXIT_FAILURE);
 				exit(cmd->return_value);
-
 			}
 			//En caso del padre...
 			else
