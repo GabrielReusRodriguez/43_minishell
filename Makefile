@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/15 22:40:57 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/17 21:45:33 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC = 	main.c							\
 		env/env_utils.c					\
 		env/env_var_getter.c			\
 		env/environment.c				\
+		env/env_to_char.c				\
 		env/var_cache.c					\
 		executor/executor_jobs.c		\
 		executor/executor_cmd.c			\
@@ -77,6 +78,7 @@ SRC = 	main.c							\
 		job/job.c						\
 		job/job_utils.c					\
 		path/path_permission.c			\
+		path/path_pathfile.c			\
 		redirect/redirect_utils.c		\
 		redirect/redirect.c				\
 		shell/minishell.c				\

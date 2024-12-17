@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/15 22:16:37 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/17 21:19:01 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 
 #include <stdio.h>
 
-
+/*
 static	bool	execute_execve(t_minishell *shell, t_cmd *cmd)
 {
-	
+	(void)shell;
+	(void)cmd;
+	return (true);
 }
+*/
 
 static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 {
@@ -48,7 +51,7 @@ static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 				exit(cmd->return_value);
 			else
 			{
-				if (!execute_non_builtin(shell, cmd))
+				if (!executor_execve(shell, cmd))
 					return (false);
 			}
 		}

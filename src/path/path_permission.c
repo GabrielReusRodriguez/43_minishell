@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:33:32 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/15 22:46:00 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/17 21:33:28 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include "libft.h"
+#include "minishell.h"
 
 /*
 int access(const char *pathname, int mode);
