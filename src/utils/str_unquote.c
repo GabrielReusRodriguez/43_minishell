@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 08:27:08 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/11/20 00:27:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/21 20:59:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 #include "libft.h"
+#include "utils/string.h"
 
 static void	free_components(char *hdr, char *body, char *tail)
 {
@@ -22,7 +23,7 @@ static void	free_components(char *hdr, char *body, char *tail)
 	free(body);
 	free(tail);
 }
-
+/*
 static bool	join_compontents(const char *hdr, const char *body, \
 				const char *tail, char **final)
 {
@@ -37,7 +38,7 @@ static bool	join_compontents(const char *hdr, const char *body, \
 		return (ft_err_errno(NULL), false);
 	return (true);
 }
-
+*/
 static bool	remove_quotes(const char *txt, int init, int final, char **unquoted)
 {
 	char	*header;
@@ -62,7 +63,7 @@ static bool	remove_quotes(const char *txt, int init, int final, char **unquoted)
 		free(body);
 		return(ft_err_errno(NULL), false);
 	}
-	if (!join_compontents(header, body, tail, unquoted))
+	if (!utils_str_join_compontents(header, body, tail, unquoted))
 		return (free_components(header, body, tail), false);
 	return(free_components(header, body, tail), true);
 }    

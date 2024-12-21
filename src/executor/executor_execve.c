@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:20:07 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/17 22:27:52 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/21 21:42:29 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,26 @@
 #include "cmd.h"
 #include "env/environment.h"
 #include "path.h"
+#include "utils/string.h"
 
+#include <stdio.h>
+
+
+static void	debug(char **vector)
+{
+	size_t	i;
+
+	i = 0;
+	printf("Debug...........\n");
+	while (vector[i] != NULL)
+	{
+		printf("\t\t str _%s_\n", vector[i]);
+		i++;
+	}
+	printf("NULL\n");
+	printf("Debug ends.....\n");
+
+}
 
 /*
 int execve(const char *pathname, char *const _Nullable argv[],
@@ -32,11 +51,32 @@ bool	executor_execve(t_minishell *shell, t_cmd *cmd)
 	args = NULL;
 	envp = NULL;
 	if (!path_get_pathname(shell, cmd, &pathname))
-		return (false);
+	{
+		ft_err_error("Error getting command path"	);
+		exit (127);		
+	}
+	if (pathname == NULL)
+	{
+		ft_err_error("Command not found");
+		exit(127);
+	}
 	if (!cmd_export_params(cmd, &args))
-		return (false);
+	{
+		ft_err_error("Error treating command args");
+		exit (EXIT_FAILURE);
+	}
+	if (!utils_dchar_append_front(&args, cmd->executable))
+		exit(EXIT_FAILURE);
 	if (!env_to_char_ptr(shell, &envp))
-		return (false);
+	{
+		ft_err_error("Error treating environment");
+		exit (EXIT_FAILURE);
+	}
+	printf("Args\n");
+	debug(args);
+//	printf("Environment\n");
+//	debug(envp);
+	printf("PATH : _%s_\n", pathname);
 	if (execve(pathname, args, envp) < 0)
 	{
 		ft_ptr_free_dchar_ptr(envp);

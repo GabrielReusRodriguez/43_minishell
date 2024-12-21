@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:29:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/12 20:57:28 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/21 21:37:06 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static bool	validate_params(char **params)
 	}	
 	return (true);
 }
-
 
 static bool	builtin_process_with_args(char **params, t_minishell *shell, t_cmd *cmd)
 {

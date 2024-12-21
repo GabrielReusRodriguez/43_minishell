@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:36:20 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/12 21:06:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/21 19:23:05 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,16 @@ bool	minishell_loop(t_minishell *shell)
 
 	job_init(&job);
 	tokens_list = NULL;
-	/*
-	if (shell->mode == STANDALONE)
-		shell->run = false;
-	else
-	{
-		shell->cmd = readline(SHELL_DEFAULT_PROMPT);
-		if (ft_strlen(shell->cmd) != 0)
-			add_history(shell->cmd);
-	}
-	*/
 	if (shell->mode != STANDALONE)
 	{
 		shell->cmd = readline(SHELL_DEFAULT_PROMPT);
 		if (ft_strlen(shell->cmd) != 0)
 			add_history(shell->cmd);
+		else
+		{	free (shell->cmd);
+			shell->cmd = NULL;
+			return (true);
+		}
 	}
 	tokenizer_get_tokens(shell->cmd, &tokens_list);
 	expansor_expand(&tokens_list, shell->env);

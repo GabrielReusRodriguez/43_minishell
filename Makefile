@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/17 21:45:33 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/21 21:30:59 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ SRC = 	main.c							\
 		tokenizer/tokenizer.c			\
 		tokenizer/tokenizer_utils.c		\
 		utils/pair.c					\
+		utils/str_appends.c				\
 		utils/str_fragment.c			\
 		utils/str_join_components.c		\
 		utils/str_unquote.c				\

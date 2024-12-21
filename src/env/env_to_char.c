@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 21:45:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/17 22:24:33 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/21 19:38:03 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	env_to_char_ptr(t_minishell *shell, char ***envp)
 
 	env = NULL;
 	num_words = ft_lstsize(shell->env.vars);
-	env = (char **)malloc(num_words*sizeof(char *));
+	env = (char **)malloc((num_words + 1)*sizeof(char *));
 	if (env == NULL)
 		return (ft_err_errno(NULL), false);
 	node = shell->env.vars;
@@ -58,8 +58,10 @@ bool	env_to_char_ptr(t_minishell *shell, char ***envp)
 			ft_ptr_free_dchar_ptr(env);
 			return (false);
 		}
+		num_words++;
 		node = node->next;
 	}
+	env[num_words] = NULL;
 	*envp= env;
 	return (true);
 }

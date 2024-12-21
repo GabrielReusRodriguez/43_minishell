@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/17 21:19:01 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/17 22:45:51 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 		return (ft_err_errno(NULL),false);
 	else
 	{
+		printf("cmd->pid: %d\n", cmd->pid);
 		//En caso del hijo....
 		if (cmd->pid  == 0)
 		{
@@ -51,8 +52,10 @@ static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 				exit(cmd->return_value);
 			else
 			{
+				printf("PRE-execve\n");
 				if (!executor_execve(shell, cmd))
-					return (false);
+					exit(EXIT_FAILURE);
+				
 			}
 		}
 	}
