@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:39:22 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 18:49:59 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 18:51:11 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ bool	pipe_close(t_pipe *my_pipe)
 {
 	bool	close_read;
 	bool	close_write;
-	
+
+	close_read = true;
+	close_write = true;
 	if (my_pipe->read != FD_NONE)
 	{	
-		close_read = true;
 		if (close(my_pipe->read) < 0)
 		{
 			ft_err_errno(NULL);
@@ -58,7 +59,6 @@ bool	pipe_close(t_pipe *my_pipe)
 	}
 	if (my_pipe->write != FD_NONE)
 	{	
-		close_write = true;
 		if (close(my_pipe->write) < 0)
 		{
 			ft_err_errno(NULL);
