@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/05 21:59:38 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:44:29 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd)
 	while (init_node != final)
 	{
 		token = (t_token *)init_node->content;
-		printf("token cmd type %d  text _%s_ \n", token->type, token->text);
+//		printf("token cmd type %d  text _%s_ \n", token->type, token->text);
 		if (token->type == TOKEN_TYPE_REDIR)
 		{
-			printf("Entra redir\n");
+//			printf("Entra redir\n");
 			if (!cmd_add_redirection(&init_node, *cmd))
 			{
 				cmd_destroy(*cmd);
@@ -117,7 +117,7 @@ bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd)
 		}
 		if (token->type == TOKEN_TYPE_WORD)
 		{
-			printf("Entra word\n");
+//			printf("Entra word\n");
 			if (!cmd_add_word(&init_node,*cmd))
 			{
 				cmd_destroy(*cmd);
@@ -128,6 +128,6 @@ bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd)
 		init_node = init_node->next;
 	}
 	cmd_get_type(final, *cmd);
-	cmd_debug(*cmd);
+//	cmd_debug(*cmd);
 	return (true);
 }

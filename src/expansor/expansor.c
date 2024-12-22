@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/11/20 00:28:05 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:46:48 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 #include "tokenizer/tokenizer.h"
 
+/*
 static void debug_tokens(t_list *list)
 {
 	t_list *node;
@@ -39,7 +40,7 @@ static void debug_tokens(t_list *list)
 		node = node->next;
 	}
 }
-
+*/
 static bool	expansor_expand_node(t_list *node, t_list **new_nodes, t_environment env)
 {
 	t_token	*token;
@@ -81,6 +82,6 @@ bool	expansor_expand(t_list **token_list, t_environment env)
 	}
 	ft_lstclear(token_list, tokenizer_clear_list_node);
 	*token_list = new_list;
-	debug_tokens(*token_list);
+//	debug_tokens(*token_list);
 	return (true);
 }

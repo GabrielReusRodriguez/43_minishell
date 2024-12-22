@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:29:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/15 22:19:29 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:45:02 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "minishell.h"
 #include "cmd.h"
 #include "builtins.h"
+#include "executor.h"
+
+#include <stdio.h>
 
 bool	executor_execute_logic(t_minishell *shell, t_cmd *cmd)
 {
@@ -23,6 +26,9 @@ bool	executor_execute_logic(t_minishell *shell, t_cmd *cmd)
 	else
 	{
 		cmd->return_value = EXIT_SUCCESS;
+//		printf("PRE-execve logic\n");
+		if (!executor_execve(shell, cmd))
+			exit(EXIT_FAILURE);
 	}
 	return (true);
 }

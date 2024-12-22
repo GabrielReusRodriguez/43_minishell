@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:20:07 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/21 21:42:29 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:48:11 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-
+/*
 static void	debug(char **vector)
 {
 	size_t	i;
@@ -37,6 +37,7 @@ static void	debug(char **vector)
 	printf("Debug ends.....\n");
 
 }
+*/
 
 /*
 int execve(const char *pathname, char *const _Nullable argv[],
@@ -72,11 +73,11 @@ bool	executor_execve(t_minishell *shell, t_cmd *cmd)
 		ft_err_error("Error treating environment");
 		exit (EXIT_FAILURE);
 	}
-	printf("Args\n");
-	debug(args);
+//	printf("Args\n");
+//	debug(args);
 //	printf("Environment\n");
 //	debug(envp);
-	printf("PATH : _%s_\n", pathname);
+//	printf("PATH : _%s_\n", pathname);
 	if (execve(pathname, args, envp) < 0)
 	{
 		ft_ptr_free_dchar_ptr(envp);

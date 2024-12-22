@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 21:04:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/21 19:55:51 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:45:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,12 @@ bool	path_get_pathname(t_minishell *shell, t_cmd *cmd, char **pathname)
 		*pathname = ft_strdup(cmd->executable);
 		return (true);
 	}
-	printf("\tPATH: NO directo\n");
 	if (!env_get_var(shell->env, "PATH", &path))
 		return (false);
-	printf("\tPATH: Encontramos var PATH\n");
 	folders = ft_split(path, ':');
 	free (path);
 	if (folders == NULL)
 		return (ft_err_errno(NULL), false);
-	printf("\tPATH: Empezamos los trys\n");
 	if (!try_path_folders(cmd, folders, pathname))
 	{
 		ft_ptr_free_dchar_ptr(folders);

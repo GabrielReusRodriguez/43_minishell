@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:32:55 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 18:43:15 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:14:01 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_pipe
 
 //file/pipes.c
 t_pipe	pipe_new(void);
-bool	pipe_init(t_pipe *my_pipe);
+bool	pipe_open(t_pipe *my_pipe);
 bool	pipe_close(t_pipe *my_pipe);
 
 #endif

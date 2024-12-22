@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 20:00:32 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:17:38 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ void	cmd_debug(t_cmd *debug)
 			node = node->next;
 		}
 	}
+	printf("\t Type: %d\n", debug->type);
 	printf("END DEBUG CMD*******************************\n");
 }

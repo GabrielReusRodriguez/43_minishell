@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/17 22:44:24 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:47:24 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static	bool	wait_status(t_job *job, t_minishell *shell)
 		cmd = (t_cmd *)node->content;
 		if (cmd->pid != -1)
 		{
-			printf("Waitting for ... %d\n", cmd->pid);
+//			printf("Waitting for ... %d\n", cmd->pid);
 			pid = waitpid(cmd->pid, &cmd->return_value,0);
 			if (pid < 0)
 				return (ft_err_errno(NULL), false);
-			printf("Waitting for ... %d ENDS\n", cmd->pid);
+//			printf("Waitting for ... %d ENDS\n", cmd->pid);
 			status = cmd->return_value;
 		}
 		node = node->next;
