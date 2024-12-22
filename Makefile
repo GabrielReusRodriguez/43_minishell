@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/21 21:30:59 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/22 18:39:07 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC = 	main.c							\
 		expansor/expansor_cmd.c			\
 		expansor/expansor_utils.c		\
 		file/fd.c						\
+		file/pipes.c					\
 		job/job.c						\
 		job/job_utils.c					\
 		path/path_permission.c			\

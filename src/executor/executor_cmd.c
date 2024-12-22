@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/17 22:45:51 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/22 18:30:13 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,26 @@ static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 
 static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 {
-		cmd->pid = fork();
-		if (cmd->pid < 0)
-			return (ft_err_errno(NULL),false);
+	
+	cmd->pid = fork();
+	if (cmd->pid < 0)
+		return (ft_err_errno(NULL),false);
+	else
+	{
+		//En caso del hijo....
+		if (cmd->pid  == 0)
+		{
+			if (!executor_execute_logic(shell, cmd))
+				exit(EXIT_FAILURE);
+			exit(cmd->return_value);
+		}
+		//En caso del padre...
 		else
 		{
-			//En caso del hijo....
-			if (cmd->pid  == 0)
-			{
-				if (!executor_execute_logic(shell, cmd))
-					exit(EXIT_FAILURE);
-				exit(cmd->return_value);
-			}
-			//En caso del padre...
-			else
-			{
-			
-			}		
-		}
-		return (true);
+		
+		}		
+	}
+	return (true);
 }
 
 bool	executor_execute_cmd(t_minishell *shell, t_cmd *cmd, bool is_pipeline)
