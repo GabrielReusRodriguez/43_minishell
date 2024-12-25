@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:37:43 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 19:44:49 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 23:04:18 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,24 @@
 
 static bool	execute_non_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 {
-	bool	cmd_builtin;
-
 	//Volvemos los fds a lo normal de stdout.
 	if (!fd_replace(shell->config.fd_copy_stdout, STDOUT_FILENO))
 	{
 		cmd->return_value = EXIT_FAILURE;
 		return (false);
 	}
-	cmd_builtin = is_builtin(cmd); 
-	if (cmd_builtin)
-	{
-		if (!execute_builtin(cmd, shell))
-			return (false);
-	}
+	if (is_builtin(cmd))
+		return (execute_builtin(cmd, shell, false));
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		return (ft_err_errno(NULL),false);
 	else
 	{
-//		printf("cmd->pid: %d\n", cmd->pid);
 		//En caso del hijo....
 		if (cmd->pid  == 0)
 		{
-			if (cmd_builtin)
-				exit(cmd->return_value);
-			else
-			{
-//				printf("PRE-execve\n");
-				if (!executor_execve(shell, cmd))
-					exit(EXIT_FAILURE);
-				
-			}
+			if (!executor_execve(shell, cmd))
+				exit(EXIT_FAILURE);
 		}
 		else
 		{
@@ -83,7 +69,9 @@ static bool	execute_pipeline_cmd(t_minishell *shell, t_cmd *cmd)
 	t_pipe cmd_pipe;
 
 	if (!execute_prepare_pipes(&cmd_pipe))
-		return (false);	
+		return (false);		
+	if (is_builtin(cmd))
+		return (execute_builtin(cmd, shell, true));
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		return (ft_err_errno(NULL),false);

@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:27:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/12 20:26:48 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 22:56:37 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 
 //builtins/builtins_utils.c
 bool	is_builtin(t_cmd *cmd);
-bool	execute_builtin(t_cmd *cmd, t_minishell *shell);
+bool	execute_builtin(t_cmd *cmd, t_minishell *shell, bool is_pipeline);
 int		builtin_count_params(char **params);
 
 //builtins/builtin_exit.c
-bool	builtin_exit(char **params, t_minishell *shell, t_cmd *cmd);
+bool	builtin_exit(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline);
 
 //builtins/builtin_env.c
-bool	builtin_env(char **params, t_minishell *shell, t_cmd *cmd);
+bool	builtin_env(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline);
 
 //builtin/builtin_export.c
-bool	builtin_export(char **params, t_minishell *shell, t_cmd *cmd);
+bool	builtin_export(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline);
 
 /*
 //builtins/builtins_utils.c

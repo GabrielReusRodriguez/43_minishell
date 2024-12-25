@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/11 21:31:36 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 22:36:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 # include "tokenizer/token.h"
 
+# define CMD_NO_PID -1
 typedef enum e_cmd_type
 {
 	CMD_TYPE_NONE,

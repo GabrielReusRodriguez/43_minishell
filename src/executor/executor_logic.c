@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:29:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 19:45:02 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 22:06:48 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 
 bool	executor_execute_logic(t_minishell *shell, t_cmd *cmd)
 {
-	if (is_builtin(cmd))
-		return (execute_builtin(cmd, shell));
-	else
-	{
+//	if (is_builtin(cmd))
+//		return (execute_builtin(cmd, shell));
+//	else
+//	{
 		cmd->return_value = EXIT_SUCCESS;
 //		printf("PRE-execve logic\n");
 		if (!executor_execve(shell, cmd))
 			exit(EXIT_FAILURE);
-	}
+//	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 19:47:24 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 22:48:20 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	unsigned char	translate_status(int status)
 	return (status);
 }
 
-static	bool	wait_status(t_job *job, t_minishell *shell)
+static	bool	get_status(t_job *job, t_minishell *shell)
 {
 	t_list	*node;
 	t_cmd	*cmd;
@@ -44,15 +44,15 @@ static	bool	wait_status(t_job *job, t_minishell *shell)
 	while(node != NULL)
 	{
 		cmd = (t_cmd *)node->content;
-		if (cmd->pid != -1)
+		if (cmd->pid != CMD_NO_PID)
 		{
-//			printf("Waitting for ... %d\n", cmd->pid);
 			pid = waitpid(cmd->pid, &cmd->return_value,0);
 			if (pid < 0)
 				return (ft_err_errno(NULL), false);
-//			printf("Waitting for ... %d ENDS\n", cmd->pid);
 			status = cmd->return_value;
 		}
+		else
+			status = cmd->return_value;
 		node = node->next;
 	}
 	shell->last_status = translate_status(status);
@@ -90,5 +90,5 @@ bool	executor_execute_job(t_minishell *shell, t_job *job)
 	//EN caso que sea modo stand alone, hemos de salir del shell.
 	if (shell->mode == STANDALONE)
 		shell->run = false;
-	return(wait_status(job, shell));
+	return(get_status(job, shell));
 }

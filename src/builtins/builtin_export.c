@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:27:41 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/12 20:27:45 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/25 23:02:38 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ static void	builtin_env_print_var(t_pair pair)
 	ft_putendl_fd("\"", STDOUT_FILENO);
 }
 
-bool	builtin_export(char **params, t_minishell *shell, t_cmd *cmd)
+bool	builtin_export(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline)
 {
 	t_list	*node;
 	t_pair	*pair;
 
 	(void)cmd;
 	(void)params;
+	(void) is_pipeline;
 	node = shell->env.vars;
 	while (node != NULL)
 	{
