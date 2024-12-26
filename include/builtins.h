@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:27:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/25 22:56:37 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/26 18:03:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ bool	builtin_env(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline
 
 //builtin/builtin_export.c
 bool	builtin_export(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline);
+
+//builtin/builtin_echo.c
+bool	builtin_echo(char **params, t_minishell *shell, t_cmd *cmd, bool is_pipeline);
 
 /*
 //builtins/builtins_utils.c
