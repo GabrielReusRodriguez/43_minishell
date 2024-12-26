@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/03 22:28:56 by gabriel           #+#    #+#              #
-#    Updated: 2024/12/26 18:49:02 by gabriel          ###   ########.fr        #
+#    Updated: 2024/12/26 19:20:49 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,45 +54,47 @@ endif
 
 LIBS_FLAG = -lreadline -lft -lgnl 
 
-SRC = 	main.c							\
-		builtins/builtin_env.c			\
-		builtins/builtin_echo.c			\
-		builtins/builtin_export.c		\
-		builtins/builtin_exit.c			\
-		builtins/builtins_utils.c		\
-		cmd/cmd.c						\
-		cmd/cmd_params.c				\
-		cmd/cmd_utils.c					\
-		env/env_utils.c					\
-		env/env_var_getter.c			\
-		env/environment.c				\
-		env/env_to_char.c				\
-		env/var_cache.c					\
-		executor/executor_jobs.c		\
-		executor/executor_cmd.c			\
-		executor/executor_execve.c		\
-		executor/executor_logic.c		\
-		expansor/expansor.c				\
-		expansor/expansor_cmd.c			\
-		expansor/expansor_utils.c		\
-		file/fd.c						\
-		file/pipes.c					\
-		job/job.c						\
-		job/job_utils.c					\
-		path/path_permission.c			\
-		path/path_pathfile.c			\
-		redirect/redirect_utils.c		\
-		redirect/redirect.c				\
-		shell/minishell.c				\
-		shell/minishell_utils.c			\
-		tokenizer/token.c				\
-		tokenizer/tokenizer.c			\
-		tokenizer/tokenizer_utils.c		\
-		utils/pair.c					\
-		utils/str_appends.c				\
-		utils/str_fragment.c			\
-		utils/str_join_components.c		\
-		utils/str_unquote.c				\
+SRC = 	main.c									\
+		builtins/builtin_env.c					\
+		builtins/builtin_echo.c					\
+		builtins/builtin_export.c				\
+		builtins/builtin_exit.c					\
+		builtins/builtins_utils.c				\
+		cmd/cmd.c								\
+		cmd/cmd_params.c						\
+		cmd/cmd_utils.c							\
+		env/env_utils.c							\
+		env/env_var_getter.c					\
+		env/environment.c						\
+		env/env_to_char.c						\
+		env/var_cache.c							\
+		executor/executor_jobs.c				\
+		executor/executor_cmd.c					\
+		executor/executor_cmd_pipeline.c		\
+		executor/executor_cmd_non_pipeline.c	\
+		executor/executor_execve.c				\
+		executor/executor_logic.c				\
+		expansor/expansor.c						\
+		expansor/expansor_cmd.c					\
+		expansor/expansor_utils.c				\
+		file/fd.c								\
+		file/pipes.c							\
+		job/job.c								\
+		job/job_utils.c							\
+		path/path_permission.c					\
+		path/path_pathfile.c					\
+		redirect/redirect_utils.c				\
+		redirect/redirect.c						\
+		shell/minishell.c						\
+		shell/minishell_utils.c					\
+		tokenizer/token.c						\
+		tokenizer/tokenizer.c					\
+		tokenizer/tokenizer_utils.c				\
+		utils/pair.c							\
+		utils/str_appends.c						\
+		utils/str_fragment.c					\
+		utils/str_join_components.c				\
+		utils/str_unquote.c
 
 
 SRCS = $(patsubst %.c,${SRC_DIR}/%.c, ${SRC})

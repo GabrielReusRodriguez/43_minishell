@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 18:02:21 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/26 18:55:15 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:05:19 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,26 @@ bool	builtin_echo(char **params, t_minishell *shell, t_cmd *cmd, \
 		}
 		if (has_printed)
 			if (ft_iputstr_fd(" ", STDOUT_FILENO) < 0)
+			{
+				cmd->return_value = EXIT_FAILURE;
 				return (ft_err_errno(NULL), false);
+			}
 		has_printed = true;
 		if (ft_iputstr_fd(params[i], STDOUT_FILENO) < 0)
+		{
+			cmd->return_value = EXIT_FAILURE;
 			return (ft_err_errno(NULL), false);
+		}
 		i++;
 	}
 	if (!has_n_flag)
 	{
 		if (ft_iputstr_fd("\n",STDOUT_FILENO) < 0)
+		{
+			cmd->return_value = EXIT_FAILURE;
 			return (ft_err_errno(NULL), false);
+		}
 	}
+	cmd->return_value = EXIT_SUCCESS;
 	return (true);
 }

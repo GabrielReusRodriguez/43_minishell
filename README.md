@@ -6,3 +6,5 @@ Minishell de Badalona 43
 
 
 TODO: cuando hacemos ecit 1; exit 5 , ejecuta 1 pero el waitpid usa la listra de cmds de job asi que espera tb un wait para cada uno.
+
+T4sting; ls ; ls -alh /etc/  ; echo "jajajajajajjajajajajajajajjaja" ; ls /tmp

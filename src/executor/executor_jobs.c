@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/25 22:48:20 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/26 22:13:11 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 #include "job.h"
 #include "cmd.h"
 #include "libft.h"
+#include "fd.h"
 
-#include <stdio.h>
-
+#include <unistd.h>
 
 static	unsigned char	translate_status(int status)
 {
@@ -33,62 +33,84 @@ static	unsigned char	translate_status(int status)
 	return (status);
 }
 
-static	bool	get_status(t_job *job, t_minishell *shell)
+static	bool	wait_cmd(t_cmd*cmd, int *status)
+{
+	pid_t	pid;
+
+	if (cmd->pid != CMD_NO_PID)
+	{
+		pid = waitpid(cmd->pid, &cmd->return_value,0);
+		if (pid < 0)
+			return (ft_err_errno(NULL), false);
+		*status = cmd->return_value;
+	}
+	else
+	{
+		*status = cmd->return_value;
+	}
+	return (true);	
+}
+
+static	bool	get_status(t_list *init_cmd, t_list *final_cmd, t_minishell *shell)
 {
 	t_list	*node;
 	t_cmd	*cmd;
-	pid_t	pid;
 	int		status;
 	
-	node = job->cmds;
-	while(node != NULL)
+	node = init_cmd;
+	while(node != NULL && node != final_cmd)
 	{
 		cmd = (t_cmd *)node->content;
-		if (cmd->pid != CMD_NO_PID)
-		{
-			pid = waitpid(cmd->pid, &cmd->return_value,0);
-			if (pid < 0)
-				return (ft_err_errno(NULL), false);
-			status = cmd->return_value;
-		}
-		else
-			status = cmd->return_value;
+		if (!wait_cmd(cmd, &status))
+			return (false);
 		node = node->next;
+	}
+	if (node != NULL)
+	{
+		cmd = (t_cmd *)node->content;
+		if (!wait_cmd(cmd, &status))
+			return (false);
 	}
 	shell->last_status = translate_status(status);
 	return (true);
 }
 
-static bool	executor_jobs_loop(t_minishell *shell, t_cmd *cmd)
+static bool	executor_jobs_loop(t_minishell *shell, t_list *node_cmd, t_list **last_check, \
+				bool *is_in_pipeline)
 {
-	bool	is_pipeline;
+	t_cmd	*cmd;
 
+	cmd = (t_cmd *)node_cmd->content;
 	if (cmd->type == CMD_TYPE_PIPE)
+		*is_in_pipeline = true;
+	executor_execute_cmd(shell, cmd, *is_in_pipeline);
+	if (cmd->type != CMD_TYPE_PIPE)
 	{
-		is_pipeline = true;
-		//pipe lining, pùsh at pid list and next command..
+		*is_in_pipeline = false;
+		//Hacemos los waits ya que  o es un unico proceso o es el final de una pipe....
+		if (!get_status(*last_check, node_cmd, shell))
+			return (false);
+		*last_check = node_cmd->next;
 	}
-	else
-	{
-		//;
-		is_pipeline = false;
-	}
-	executor_execute_cmd(shell, cmd, is_pipeline);
 	return (true);
 }
 
 bool	executor_execute_job(t_minishell *shell, t_job *job)
 {
 	t_list	*node;
+	t_list	*last_check;
+	bool	is_in_pipeline;
 
 	node = job->cmds;
+	last_check = node;
+	is_in_pipeline = false;
 	while (shell->run && node != NULL)
 	{
-		executor_jobs_loop(shell, (t_cmd *)node->content);
+		executor_jobs_loop(shell, node, &last_check, &is_in_pipeline);
 		node = node->next;
 	}
 	//EN caso que sea modo stand alone, hemos de salir del shell.
 	if (shell->mode == STANDALONE)
 		shell->run = false;
-	return(get_status(job, shell));
+	return (true);
 }

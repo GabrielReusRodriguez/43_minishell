@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:59:00 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/26 18:48:23 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:38:07 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ bool	execute_builtin(t_cmd *cmd, t_minishell *shell, bool is_pipeline)
 {
 	char	**params;
 
-	cmd->pid  = CMD_NO_PID;
 	params = NULL;
 	if(!cmd_export_params(cmd, &params))
 		return (false);
