@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 23:54:38 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 23:59:42 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static bool	treat_heredoc_redir(t_cmd *cmd, t_redirection *redir)
 	limitor = ft_strjoin(redir->lim_here_doc, "\n");
 	if (limitor == NULL)
 		return (ft_err_errno(NULL), false);
+	//Al crearlo con O_TMP_FILE, cuando se haga el close del ultimo fd, se elimina el fichero.
 	fd = open("/tmp/", __O_TMPFILE | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd < 0)
 	{
@@ -74,7 +75,11 @@ static bool	treat_heredoc_redir(t_cmd *cmd, t_redirection *redir)
 	free (limitor);
 	//reseteamos el file descriptor a la posicion 0
 	if (lseek(fd, 0, SEEK_SET) < 0)
+	{
+		fd_close(cmd->fd_in);
+		cmd->fd_in = FD_NONE;
 		return (ft_err_errno(NULL), false);
+	}
 	return (true);
 }
 
