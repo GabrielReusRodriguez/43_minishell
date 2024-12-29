@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:51:09 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/22 19:17:38 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 18:28:08 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "cmd.h"
 #include "tokenizer/token.h"
 #include "tokenizer/tokenizer.h"
-
+#include "fd.h"
+#include "redirection.h"
 
 #include <stdio.h>
-#include "redirection.h"
 
 t_cmd	cmd_new(void)
 {
@@ -36,6 +36,8 @@ void	cmd_init(t_cmd *cmd)
 	cmd->executable = NULL;
 	cmd->args = NULL;
 	cmd->output_redirections = NULL;	
+	cmd->fd_in = FD_NONE;
+	cmd->fd_out = FD_NONE;
 }
 
 void	cmd_destroy(t_cmd *cmd)

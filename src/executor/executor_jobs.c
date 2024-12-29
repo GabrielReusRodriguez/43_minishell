@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/26 22:13:11 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:07:58 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	bool	wait_cmd(t_cmd*cmd, int *status)
 	return (true);	
 }
 
-static	bool	get_status(t_list *init_cmd, t_list *final_cmd, t_minishell *shell)
+static	bool	finish_cmds(t_list *init_cmd, t_list *final_cmd, t_minishell *shell)
 {
 	t_list	*node;
 	t_cmd	*cmd;
@@ -63,12 +63,16 @@ static	bool	get_status(t_list *init_cmd, t_list *final_cmd, t_minishell *shell)
 		cmd = (t_cmd *)node->content;
 		if (!wait_cmd(cmd, &status))
 			return (false);
+		if (cmd->fd_out != FD_NONE && !fd_close(cmd->fd_out))
+			return (false);
 		node = node->next;
 	}
 	if (node != NULL)
 	{
 		cmd = (t_cmd *)node->content;
 		if (!wait_cmd(cmd, &status))
+			return (false);
+		if (cmd->fd_out != FD_NONE && !fd_close(cmd->fd_out))
 			return (false);
 	}
 	shell->last_status = translate_status(status);
@@ -88,7 +92,7 @@ static bool	executor_jobs_loop(t_minishell *shell, t_list *node_cmd, t_list **la
 	{
 		*is_in_pipeline = false;
 		//Hacemos los waits ya que  o es un unico proceso o es el final de una pipe....
-		if (!get_status(*last_check, node_cmd, shell))
+		if (!finish_cmds(*last_check, node_cmd, shell))
 			return (false);
 		*last_check = node_cmd->next;
 	}

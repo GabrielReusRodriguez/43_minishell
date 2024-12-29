@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/25 22:36:22 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:58:18 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/types.h> 
 
+# include "minishell.h"
 # include "libft.h"
 # include "tokenizer/token.h"
 
@@ -35,6 +36,8 @@ typedef struct s_cmd
 	t_list			*output_redirections;
 	t_cmd_type		type;
 	pid_t			pid;
+	int				fd_out;
+	int				fd_in;
 	int				return_value;
 }	t_cmd;
 
@@ -49,6 +52,10 @@ void	cmd_clear_list_node(void *);
 bool	cmd_parse_tokens(t_list *init, t_list *final, t_cmd **cmd);
 
 bool	cmd_export_params(t_cmd *cmd, char ***str_params);
+
+//cmd/cmd_fds.c
+bool	cmd_open_redir_outputs(t_cmd *cmd);
+bool	cmd_open_redir_inputs(t_cmd *cmd, t_minishell *shell);
 
 
 #endif
