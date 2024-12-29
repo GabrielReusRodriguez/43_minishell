@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 23:48:06 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 23:54:38 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ bool	cmd_open_redir_inputs(t_cmd *cmd)
 	{
 		if (cmd->fd_in != FD_NONE)
 		{
-			if(!fd_close(cmd->fd_out))
+			if(!fd_close(cmd->fd_in))
 				return (false);
 		}
 		redir = (t_redirection *)node->content;
