@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 21:21:30 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 22:52:19 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	treat_out_add_red(t_redirection *redir, t_cmd *cmd)
 		if (type != PATH_TYPE_FILE)
 			return (ft_err_error("Is a directory"), true);
 	}
-	fd = open(redir->file, O_CREAT | O_WRONLY, \
+	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, \
 				S_IRUSR | S_IWUSR | \
 				S_IRGRP | S_IWGRP | \
 				S_IROTH

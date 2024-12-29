@@ -6,19 +6,21 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 22:37:47 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 23:48:06 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+//#include <sys/types.h>
 
 #include "minishell.h"
 #include "cmd.h"
 #include "redirection.h"
 #include "fd.h"
 #include "path.h"
+#include "ft_get_next_line.h"
 
 static bool	treat_file_redir(t_cmd *cmd, t_redirection *redir)
 {
@@ -36,17 +38,53 @@ static bool	treat_file_redir(t_cmd *cmd, t_redirection *redir)
 		return (ft_err_errno(NULL), false);
 	cmd->fd_in = fd;
 	return (true);
-
 }
+
+#include <stdio.h>
+
+static bool	treat_heredoc_redir(t_cmd *cmd, t_redirection *redir)
+{
+	int			fd;
+	char		*line;
+	char		*limitor;
+
+	line = "";
+	limitor = ft_strjoin(redir->lim_here_doc, "\n");
+	if (limitor == NULL)
+		return (ft_err_errno(NULL), false);
+	fd = open("/tmp/", __O_TMPFILE | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd < 0)
+	{
+		free (limitor);
+		return (ft_err_errno(NULL), false);
+	}
+	cmd->fd_in = fd;
+	while (line != NULL)
+	{
+		ft_iputstr_fd("> ", STDOUT_FILENO);
+		line = ft_get_next_line_many_fds(STDIN_FILENO);
+		if (line == NULL || ft_strcmp(line, limitor) == 0)
+		{
+			free (line);
+			break;
+		}
+		ft_iputstr_fd(line, fd);
+		free (line);
+	}
+	free (limitor);
+	//reseteamos el file descriptor a la posicion 0
+	if (lseek(fd, 0, SEEK_SET) < 0)
+		return (ft_err_errno(NULL), false);
+	return (true);
+}
+
 
 static bool	treat_in_redirection(t_cmd *cmd, t_redirection *redir)
 {
 	if (redir->type == REDIRECT_IN_FILE)
 		return (treat_file_redir(cmd, redir));
 	if (redir->type == REDIRECT_IN_HEREDOC)
-	{
-
-	}
+		return (treat_heredoc_redir(cmd, redir));
 	if (redir->type == REDIRECT_IN_HERESTRING)
 	{
 

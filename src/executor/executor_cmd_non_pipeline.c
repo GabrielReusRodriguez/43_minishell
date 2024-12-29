@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 19:15:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 22:36:35 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 23:25:58 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,27 @@ static bool	prepare_output_redirs(t_cmd *cmd)
 	return (true);
 }
 
+static bool	prepare_redirs(t_cmd *cmd)
+{
+	if (!prepare_input_redirs(cmd))
+	{
+		cmd->return_value = EXIT_FAILURE;
+		return (false);
+	}
+	if (!prepare_output_redirs(cmd))
+	{
+		cmd->return_value = EXIT_FAILURE;
+		return (false);
+	}
+	return (true);
+}
+
 static bool	execute_builtin_non_pipe(t_minishell *shell, t_cmd *cmd)
 {
 	bool	result;
 
+	if (!prepare_redirs(cmd))
+		return (false);
 	result = execute_builtin(cmd, shell, false);
 	if (cmd->fd_out != FD_NONE)
 		if (!fd_replace(shell->config.fd_copy_stdout, STDOUT_FILENO))
@@ -58,7 +75,7 @@ static bool	execute_builtin_non_pipe(t_minishell *shell, t_cmd *cmd)
 bool	execute_cmd_non_pipeline(t_minishell *shell, t_cmd *cmd)
 {
 	cmd->pid = CMD_NO_PID;
-	if (!prepare_output_redirs(cmd))
+	if (!prepare_redirs(cmd))
 		return (false);
 	if (is_builtin(cmd))
 		return (execute_builtin_non_pipe(shell, cmd));
@@ -70,8 +87,6 @@ bool	execute_cmd_non_pipeline(t_minishell *shell, t_cmd *cmd)
 		//En caso del hijo....
 		if (cmd->pid  == 0)
 		{
-			if (!prepare_input_redirs(cmd))
-				exit (EXIT_FAILURE);
 			if (!executor_execve(shell, cmd))
 				exit(EXIT_FAILURE);
 		}
