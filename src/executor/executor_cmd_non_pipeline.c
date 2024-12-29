@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 19:15:36 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 21:52:09 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 22:36:35 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 
 static bool	prepare_input_redirs(t_cmd *cmd)
 {
+	if (!cmd_open_redir_inputs(cmd))
+		return (false);
+	if (cmd->fd_in != FD_NONE)
+	{
+		if (!fd_replace(cmd->fd_in, STDIN_FILENO))
+			return (false);
+	}
 	return (true);
 }
 

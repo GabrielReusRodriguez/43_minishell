@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 19:58:18 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/12/29 21:58:41 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	cmd_export_params(t_cmd *cmd, char ***str_params);
 
 //cmd/cmd_fds.c
 bool	cmd_open_redir_outputs(t_cmd *cmd);
-bool	cmd_open_redir_inputs(t_cmd *cmd, t_minishell *shell);
+bool	cmd_open_redir_inputs(t_cmd *cmd);
 
 
 #endif
