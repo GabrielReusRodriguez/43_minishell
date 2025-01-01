@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 10:33:46 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/01 13:12:43 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 14:25:42 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,35 @@ static void debug_tokens(t_list *list)
 */
 static bool	expansor_expand_node(t_list *node, t_list **new_nodes, t_environment env)
 {
-	t_token	*token;
-	char	*new_cmd;
-	char	*unquoted;
+	t_token			*token;
+	char			*new_cmd;
+	char			*unquoted;
+	t_token_type	type;
 
 	unquoted = NULL;
 	new_cmd = NULL;
 	token = (t_token *)node->content;
 	if (!expansor_expand_string(token->text,env, &new_cmd))
 		return (false);
-			//Added unquote .
+	//Added unquote .
 	if (!utils_string_unquote(new_cmd, &unquoted))
 		return (false);
 	free (new_cmd);
 	//End Added unquote.
-	//*new_nodes = node;
-	if (!tokenizer_get_tokens(unquoted, new_nodes))
-		return (free (unquoted), false);
-	free (unquoted);
+//	printf("Unquoted: _%s_\n", unquoted);
+	//bool	token_new(t_token **token, char *_text, t_token_type _type)
+	type = token->type;
+	if (type == TOKEN_TYPE_DQUOTE || type == TOKEN_TYPE_SQUOTE)
+		type = TOKEN_TYPE_WORD;
+	if (!token_new (&token, unquoted, type))
+	{
+		free(unquoted);
+		return (ft_err_errno(NULL), false);
+	}
+	*new_nodes = ft_lstnew(token);
+	//if (!tokenizer_get_tokens(unquoted, new_nodes))
+	//	return (free (unquoted), false);
+	//free (unquoted);
 	return (true);
 }
 

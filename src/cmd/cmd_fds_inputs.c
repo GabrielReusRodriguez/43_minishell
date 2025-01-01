@@ -6,14 +6,13 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/01 13:05:31 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 14:28:47 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-//#include <sys/types.h>
 
 #include "minishell.h"
 #include "cmd.h"
@@ -39,8 +38,6 @@ static bool	treat_file_redir(t_cmd *cmd, t_redirection *redir)
 	cmd->fd_in = fd;
 	return (true);
 }
-
-#include <stdio.h>
 
 static bool	treat_heredoc_redir(t_cmd *cmd, t_redirection *redir)
 {
@@ -91,7 +88,7 @@ static bool	treat_herestring_redir(t_cmd *cmd, t_redirection *redir)
 	if (fd < 0)
 		return (ft_err_errno(NULL), false);
 	cmd->fd_in = fd;
-	ft_iputstr_fd(redir->here_string, fd);
+	ft_putendl_fd(redir->here_string, fd);
 	if (lseek(fd, 0, SEEK_SET) < 0)
 	{
 		fd_close(cmd->fd_in);
