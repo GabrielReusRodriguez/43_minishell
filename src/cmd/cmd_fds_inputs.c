@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:28:39 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 23:59:42 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:05:31 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,23 @@ static bool	treat_heredoc_redir(t_cmd *cmd, t_redirection *redir)
 	return (true);
 }
 
+static bool	treat_herestring_redir(t_cmd *cmd, t_redirection *redir)
+{
+	int	fd;	
+
+	fd = open("/tmp/", __O_TMPFILE | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd < 0)
+		return (ft_err_errno(NULL), false);
+	cmd->fd_in = fd;
+	ft_iputstr_fd(redir->here_string, fd);
+	if (lseek(fd, 0, SEEK_SET) < 0)
+	{
+		fd_close(cmd->fd_in);
+		cmd->fd_in = FD_NONE;
+		return (ft_err_errno(NULL), false);
+	}
+	return (true);	
+}
 
 static bool	treat_in_redirection(t_cmd *cmd, t_redirection *redir)
 {
@@ -91,9 +108,7 @@ static bool	treat_in_redirection(t_cmd *cmd, t_redirection *redir)
 	if (redir->type == REDIRECT_IN_HEREDOC)
 		return (treat_heredoc_redir(cmd, redir));
 	if (redir->type == REDIRECT_IN_HERESTRING)
-	{
-
-	}
+		return(treat_herestring_redir(cmd, redir));
 	return (true);
 }
 

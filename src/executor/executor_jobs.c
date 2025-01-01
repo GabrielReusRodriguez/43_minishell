@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:34:45 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/29 20:07:58 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:06:57 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static bool	executor_jobs_loop(t_minishell *shell, t_list *node_cmd, t_list **la
 	{
 		*is_in_pipeline = false;
 		//Hacemos los waits ya que  o es un unico proceso o es el final de una pipe....
+		cmd_debug(cmd);
 		if (!finish_cmds(*last_check, node_cmd, shell))
 			return (false);
 		*last_check = node_cmd->next;
