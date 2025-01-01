@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:34:51 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/01 20:32:41 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 23:45:30 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "minishell.h"
 # include "libft.h"
 # include "tokenizer/token.h"
+# include "pipe.h"
 
 # define CMD_NO_PID -1
 typedef enum e_cmd_type

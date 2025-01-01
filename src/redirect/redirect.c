@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:59:34 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 13:20:35 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 22:53:08 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static	bool	redirect_parse_input(t_list **node, t_redirection **redir)
 
 	return (true);
 }
-
-#include <stdio.h>
 
 static	bool	redirect_parse_output(t_list **node, t_redirection **redir)
 {
