@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 19:15:38 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/01 20:25:40 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:33:44 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,6 @@
 #include "fd.h"
 #include "builtins.h"
 #include "executor.h"
-
-static bool	prepare_input_redirs(t_cmd *cmd)
-{
-	if (!cmd_open_redir_inputs(cmd))
-		return (false);
-	if (cmd->fd_in != FD_NONE)
-	{
-		if (!fd_replace(cmd->fd_in, STDIN_FILENO))
-			return (false);
-	}
-	return (true);
-}
-
-static bool	prepare_output_redirs(t_cmd *cmd)
-{
-	if (!cmd_open_redir_outputs(cmd))
-		return (false);
-	if (cmd->fd_out != FD_NONE)
-	{
-		if (!fd_replace(cmd->fd_out, STDOUT_FILENO))
-			return (false);
-	}
-	return (true);
-}
-
-static bool	prepare_redirs(t_cmd *cmd)
-{
-	if (!prepare_input_redirs(cmd))
-	{
-		cmd->return_value = EXIT_FAILURE;
-		return (false);
-	}
-	if (!prepare_output_redirs(cmd))
-	{
-		cmd->return_value = EXIT_FAILURE;
-		return (false);
-	}
-	return (true);
-}
 
 static bool	prepare_pipes(t_pipe *cmd_pipe)
 {
@@ -129,7 +90,7 @@ bool	execute_cmd_pipeline(t_minishell *shell, t_cmd *cmd)
 {
 	t_pipe cmd_pipe;
 
-	if (!prepare_redirs(cmd))
+	if (!cmd_prepare_redirs(cmd))
 		return (false);
 	//Creo la pipe SOLO si tengo otro cmd pipe detras.
 	if (cmd->type == CMD_TYPE_PIPE)

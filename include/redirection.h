@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 22:48:28 by gabriel           #+#    #+#             */
-/*   Updated: 2024/12/08 13:18:57 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:35:45 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ bool	redirect_new(t_redirection	**redirect);
 void	redirect_destroy(t_redirection *redir);
 bool	redirect_parse(t_list **node, t_redirection **redir);
 void	redirect_clear_list_node(void *);
-
 
 #endif
